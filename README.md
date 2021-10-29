@@ -29,7 +29,7 @@ Tech Stack
   - ✅ wall
   - ✅ enemy
   - ✅ shield
-  - tank
+  - ✅ tank
   - board
 - Begin design of objects in the game
 #### Weekend
