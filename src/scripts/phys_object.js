@@ -1,14 +1,15 @@
 class PhysObject {
   constructor(parent, options) {
+    let goodOptions = options || PhysObject.setDefaults();
     this.canvas = parent
     this.context = this.canvas.getContext('2d');
-    this.color = options.color;
-    this.pos = options.pos;
-    this.size = options.size;
+    this.color = goodOptions.color;
+    this.pos = goodOptions.pos;
+    this.size = goodOptions.size;
   }
   static setOptions(x, y, w, h, color) {
     return {
-      color: color || 'blue',
+      color: color || 'darkgray',
       pos: {
         x: x,
         y: y
@@ -33,6 +34,20 @@ class PhysObject {
   setObj() {
     this.context.fillStyle = this.color;
     this.context.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+  }
+
+  static setDefaults() {
+    return {
+      color: 'darkgray',
+      pos: {
+        x: 10,
+        y: 10
+      },
+      size: {
+        w: 10,
+        h: 10
+      }
+    }
   }
 }
 

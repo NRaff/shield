@@ -3,6 +3,7 @@ import Wall from "./scripts/wall";
 import Enemy from "./scripts/enemy";
 import Shield from "./scripts/shield";
 import ArcType from "./scripts/ArcType";
+import Tank from "./scripts/tank";
 
 document.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("app_page");
@@ -24,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   enemy.draw();
   wallObj2.drawHorizonal();
   wallObj3.drawVertical();
-  newObj.draw();
-  newShield.draw();
+  // newObj.draw();
+  // newShield.draw();
+
+  const tankOptions = Tank.setOptions(60,100,10,10);
+  const newTank = new Tank(shield);
+  newTank.drawTank();
 })

@@ -14,6 +14,8 @@ class Shield {
     ctx.beginPath();
     ctx.arc(this.pos.x, this.pos.y, this.getRadius(),0,this.arcType());
     ctx.moveTo(20,20);
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 2;
     ctx.stroke();
   }
 

@@ -25,11 +25,12 @@ Tech Stack
 - ✅ create html skeleton
 - ✅ add css reset
 - Complete basic board creation
-  - phys_object
-  - wall
-  - enemy
-  - board
+  - ✅ phys_object
+  - ✅ wall
+  - ✅ enemy
+  - ✅ shield
   - tank
+  - board
 - Begin design of objects in the game
 #### Weekend
 - Complete objects design for tank, enemies, goals, map
