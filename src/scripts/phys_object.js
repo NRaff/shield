@@ -1,20 +1,38 @@
 class PhysObject {
-  constructor(parent) {
+  constructor(parent, options) {
     this.canvas = parent
     this.context = this.canvas.getContext('2d');
+    this.color = options.color;
+    this.pos = options.pos;
+    this.size = options.size;
   }
-
-  draw(objDraw) {
-    if (objDraw) {
-      objDraw();
+  static setOptions(x, y, w, h, color) {
+    return {
+      color: color || 'darkgray',
+      pos: {
+        x: x,
+        y: y
+      },
+      size: {
+        w: w || 10,
+        h: h || 10
+      }
+    }
+  }
+  //Draws either the set object described by the parameters, 
+  //or draws an object according to the passed in function
+  draw(fn_objDraw) {
+    if (fn_objDraw) {
+      fn_objDraw();
     } else {
-      this.defaultObj();
+      this.setObj();
     }
   }
 
-  defaultObj() {
-    this.context.fillStyle = "red";
-    this.context.fillRect(10, 10, 50, 50);
+  //Draws the set object
+  setObj() {
+    this.context.fillStyle = this.color;
+    this.context.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
   }
 }
 

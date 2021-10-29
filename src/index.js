@@ -4,6 +4,8 @@ import Test from "./scripts/phys_object"
 document.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("app_page");
   const shield = document.getElementById("shield_game");
-  const newObj = new PhysObject(shield);
+  const objOptions = PhysObject.setOptions(10,10);
+  console.log(objOptions);
+  const newObj = new PhysObject(shield, objOptions);
   newObj.draw();
 })
