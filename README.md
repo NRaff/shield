@@ -20,7 +20,7 @@ Tech Stack
 - The tank will be able to fire projectiles at and destroy the various towers
 - The towers will become mobile enemies
 ### Implementation Timeline
-Friday
+#### Friday
 - Setup the project file structure
 - Complete basic board creation
 - Begin design of objects in the game
@@ -28,19 +28,19 @@ Weekend
 - Complete objects design for tank, enemies, goals, map
 - Add player's tank
 - Connect tank to keyboard to enable movement around map
-Monday
+#### Monday
 - Connect mouse action to shield angle
 - Enable collisions with map objects
 - Add Enemies
 - Allow enemies to fire projectiles
 - Enable collisions with projectiles
-Tuesday
+#### Tuesday
 - Build additional levels
 - Polish design and collision animations
 - Play and test
-Wednesday
+#### Wednesday
 - Finalize design
 - Prepare demo
-Thursday
+#### Thursday
 - Deploy to Github Pages
 - Prep and complete demo
