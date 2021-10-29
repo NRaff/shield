@@ -7,8 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const objOptions = PhysObject.setOptions(10,10);
   console.log(objOptions);
   const newObj = new PhysObject(shield, objOptions);
-  const wallOptions = PhysObject.setOptions(50,50,5,50);
-  const wallObj = new Wall(shield, wallOptions);
-  wallObj.draw();
+  const wallOptions = PhysObject.setOptions(50,50,50,50);
+  const endPos = {x: 70, y: 20};
+  const wallObj1 = new Wall(shield, wallOptions, endPos);
+  wallObj1.drawDiagonal()
+  const wallObj2 = new Wall(shield, wallOptions)
+  const wallObj3 = new Wall(shield, wallOptions)
+  wallObj2.drawHorizonal();
+  wallObj3.drawVertical();
   newObj.draw();
 })
