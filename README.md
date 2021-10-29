@@ -24,7 +24,7 @@ Tech Stack
 - Setup the project file structure
 - Complete basic board creation
 - Begin design of objects in the game
-Weekend
+#### Weekend
 - Complete objects design for tank, enemies, goals, map
 - Add player's tank
 - Connect tank to keyboard to enable movement around map
