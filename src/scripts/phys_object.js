@@ -8,7 +8,7 @@ class PhysObject {
   }
   static setOptions(x, y, w, h, color) {
     return {
-      color: color || 'darkgray',
+      color: color || 'blue',
       pos: {
         x: x,
         y: y
