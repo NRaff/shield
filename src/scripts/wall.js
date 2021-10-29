@@ -10,11 +10,13 @@ class Wall extends PhysObject {
 
   //Draws a vertical wall when passed into the draw function
   drawVertical() {
+    this.context.fillStyle = this.color;
     this.context.fillRect(this.pos.x, this.pos.y,5,this.size.h)
   }
 
   //Draws a horizontal wall when passed into the draw function
   drawHorizonal() {
+    this.context.fillStyle = this.color;
     this.context.fillRect(this.pos.x, this.pos.y, this.size.w, 5)
   }
 
@@ -29,6 +31,7 @@ class Wall extends PhysObject {
     ctx.lineTo(this.endPos.x + 5, this.endPos.y);
     ctx.fillStyle = this.color;
     ctx.fill();
+    ctx.cl
   }
 }
 
