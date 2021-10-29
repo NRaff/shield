@@ -21,7 +21,9 @@ Tech Stack
 - The towers will become mobile enemies
 ### Implementation Timeline
 #### Friday
-- Setup the project file structure
+- ✅ Setup the project file structure
+- ✅ create html skeleton
+- ✅ add css reset
 - Complete basic board creation
 - Begin design of objects in the game
 #### Weekend

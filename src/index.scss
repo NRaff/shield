@@ -1,0 +1,19 @@
+@import "./styles/cssreset.scss";
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 20px;
+}
+
+canvas {
+  display: block;
+  width: 75%;
+  height: auto;
+  border-radius: 5px;
+  background-color: lightgrey;
+  margin: 20px;
+}
