@@ -10,6 +10,10 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
+    this.bounds = {
+      xLeft: 30,
+      xRight: this.width - 30
+    }
 
   }
 
@@ -32,7 +36,9 @@ class GameMap {
 
   // Draws barriers for the map. Barriers may be corners, slots, or walls
   drawBarriers() {
+    // while (this.walls.length < this.level) {
 
+    // }
   }
 
   // draws two walls that intersect to form a 90 degree angle
@@ -60,6 +66,30 @@ class GameMap {
     let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
     const wall = new Wall(this.canvas, options, endPos);
     wall.randomWall();
+  }
+
+  inBounds(object){
+    if (this.startPosBetweenGoals(object) && this.startPosInsideY(object) && 
+        this.endPosBetweenGoals(object) && this.endPosInsideY(object)) {
+        return true;  
+      }
+    return false;
+  }
+
+  startPosBetweenGoals(object) {
+    return (object.pos.x > this.bounds.xLeft && object.pos.x < this.bounds.xRight)
+  }
+
+  startPosInsideY(object) {
+    return (object.pos.y > 0 && object.pos.y < this.height);
+  }
+
+  endPosBetweenGoals(object) {
+    return (object.endPos.x > this.bounds.xLeft && object.endPos.x < this.bounds.xRight)
+  }
+
+  endPosInsideY(object) {
+    return (object.endPos.y > 0 && object.endPos.y < this.height);
   }
 }
 
