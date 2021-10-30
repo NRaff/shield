@@ -45,14 +45,35 @@ class Wall extends PhysObject {
     ctx.fill();
   }
 
+  drawTriangle() {
+    let ctx = this.context;
+    ctx.beginPath();
+    ctx.moveTo(this.pos.x, this.pos.y);
+    ctx.lineTo(this.endPos.x, this.pos.y);
+    ctx.lineTo(this.pos.x, this.endPos.y)
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+
   drawCorner() {
-    this.drawHorizon();
-    this.drawVert(); 
+    // -1 is a corner facing left
+    // 1 is a corner facing right
+    let direction = ArrayUtil.sample([-1, 1])
+    let ctx = this.context
+    ctx.beginPath();
+    ctx.moveTo(this.pos.x, this.pos.y);
+    ctx.lineTo(this.endPos.x, this.pos.y);
+    ctx.lineTo(this.endPos.x, this.pos.y + direction * 5);
+    ctx.lineTo(this.pos.x + direction * 5, this.pos.y + direction * 5);
+    ctx.lineTo(this.pos.x + direction * 5, this.endPos.y);
+    ctx.lineTo(this.pos.x, this.endPos.y);
+    ctx.fillStyle = this.color;
+    ctx.fill()
   }
 
   randomWall() {
     this.setRandomStartEnd();
-    let types = [this.drawVert, this.drawHorizon, this.drawDiagonal, this.drawCorner]
+    let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
     let wallType = ArrayUtil.sample(types);
     console.log(wallType)
     wallType.apply(this)

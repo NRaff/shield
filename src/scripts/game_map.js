@@ -42,7 +42,6 @@ class GameMap {
     // let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
     const wall = new Wall(this.canvas, options);
     wall.randomWall();
-    console.log(wall);
     return wall;
   }
 }
