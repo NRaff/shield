@@ -6,7 +6,7 @@ class Tank extends PhysObject {
   constructor(ctx, options) {
     super(ctx, options);
     this.color = 'darkgreen';
-    this.shield = new Shield(this.context, this.pos,'cyan',ArcType.quarter,this.size);
+    this.shield = new Shield(this.context, this.pos,'cyan',ArcType.eighth,this.size);
   }
 
   drawTank() {

@@ -13,6 +13,10 @@ const ArcType = {
 
   quarter() {
     return Math.PI / 2;
+  },
+
+  eighth() {
+    return Math.PI / 2 / 2;
   }
 }
 

@@ -1,5 +1,5 @@
+import Tank from "./tank";
 import ArcType from "./Utils/ArcType";
-import ArrayUtil from "./Utils/ArrayUtil";
 import Wall from "./wall";
 
 class GameMap {
@@ -10,6 +10,20 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
+  }
+
+  // draws the tank at a given start position
+  startTank() {
+    let options = Tank.setOptions(this.getStartPos(), 10,10, 'darkgreen', this.getStartPos());
+    let tank = new Tank(this.canvas, options)
+    tank.drawTank();
+  }
+
+  getStartPos() {
+    return {
+      x: 5,
+      y: this.height / 2 - 5 // -5 centers it since the size is an offset
+    }
   }
 
   // Draws the start and end areas of the map

@@ -20,8 +20,8 @@ class PhysObject {
         y: startPos.y
       },
       endPos: {
-        x: endPos.x,
-        y: endPos.y
+        x: endPos.x || 0,
+        y: endPos.y || 0
       },
       size: {
         w: w || 10,
