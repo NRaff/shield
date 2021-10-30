@@ -1,4 +1,4 @@
-import ArcType from "./ArcType";
+import ArcType from "./Utils/ArcType";
 import PhysObject from "./phys_object";
 import Shield from "./shield";
 

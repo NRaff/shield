@@ -1,5 +1,5 @@
-import ArcType from "./ArcType";
-import ArrayUtil from "./ArrayUtil";
+import ArcType from "./Utils/ArcType";
+import ArrayUtil from "./Utils/ArrayUtil";
 import Wall from "./wall";
 
 class GameMap {
@@ -10,11 +10,6 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
-    this.bounds = {
-      xLeft: 30,
-      xRight: this.width - 30
-    }
-
   }
 
   // Draws the start and end areas of the map
@@ -41,6 +36,7 @@ class GameMap {
     // }
   }
 
+  //! Need to migrate the wall types into the wall class
   // draws two walls that intersect to form a 90 degree angle
   drawCorner() {
     const options = Wall.setOptions(60,60,20,20)
@@ -62,34 +58,10 @@ class GameMap {
 
   // draws a flat while either horizontally or vertically (random)
   drawWall() {
-    const options = Wall.setOptions(60, 60, 20, 20)
-    let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
-    const wall = new Wall(this.canvas, options, endPos);
+    const options = Wall.setDefaults();
+    // let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
+    const wall = new Wall(this.canvas, options);
     wall.randomWall();
-  }
-
-  inBounds(object){
-    if (this.startPosBetweenGoals(object) && this.startPosInsideY(object) && 
-        this.endPosBetweenGoals(object) && this.endPosInsideY(object)) {
-        return true;  
-      }
-    return false;
-  }
-
-  startPosBetweenGoals(object) {
-    return (object.pos.x > this.bounds.xLeft && object.pos.x < this.bounds.xRight)
-  }
-
-  startPosInsideY(object) {
-    return (object.pos.y > 0 && object.pos.y < this.height);
-  }
-
-  endPosBetweenGoals(object) {
-    return (object.endPos.x > this.bounds.xLeft && object.endPos.x < this.bounds.xRight)
-  }
-
-  endPosInsideY(object) {
-    return (object.endPos.y > 0 && object.endPos.y < this.height);
   }
 }
 

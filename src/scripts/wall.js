@@ -1,12 +1,13 @@
-import ArrayUtil from "./ArrayUtil";
+import ArrayUtil from "./Utils/ArrayUtil";
+import Defaults from "./Utils/Defaults";
 import PhysObject from "./phys_object";
 
 class Wall extends PhysObject {
   //Provides functions to draw walls vertically, horizontally, and diagonally
-  constructor(ctx, options, endPos) {
+  constructor(ctx, options) {
     super(ctx, options);
     this.color = 'darkgray'
-    this.endPos = endPos
+    // this.endPos = endPos
   }
 
   //Draws a vertical wall when passed into the draw function
@@ -33,12 +34,29 @@ class Wall extends PhysObject {
     ctx.fill();
   }
 
-   randomWall() {
+  randomWall() {
+    this.setRandomStartEnd();
     let types = [this.drawVertical, this.drawHorizontal, this.drawDiagonal]
     let wallType = ArrayUtil.sample(types);
     console.log(wallType)
     wallType.apply(this)
-   }
+  }
+
+  setRandomStartEnd() {
+    let start = {
+      x: Math.floor(Math.random() * this.bounds.xRight) + this.bounds.xLeft,
+      y: Math.floor(Math.random() * this.canvas.height)
+    }
+
+    let end = {
+      x: start.x + ArrayUtil.sample(Defaults.wallLengths()),
+      y: start.y + ArrayUtil.sample(Defaults.wallLengths())
+    }
+
+    this.pos = start
+    this.endPos = end
+
+  }
 }
 
 export default Wall;
