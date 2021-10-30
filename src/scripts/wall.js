@@ -35,18 +35,24 @@ class Wall extends PhysObject {
   //Draws a diagonal wall
   drawDiagonal() {
     let ctx = this.context;
+    let offset = ArrayUtil.sample([-5,5])
     ctx.beginPath();
     ctx.moveTo(this.pos.x,this.pos.y); //set the start position from the wall
-    ctx.lineTo(this.pos.x - 5, this.pos.y); //add width to the line
+    ctx.lineTo(this.pos.x + offset, this.pos.y); //add width to the line
     ctx.lineTo(this.endPos.x, this.endPos.y);
-    ctx.lineTo(this.endPos.x + 5, this.endPos.y);
+    ctx.lineTo(this.endPos.x + offset * -1, this.endPos.y);
     ctx.fillStyle = this.color;
     ctx.fill();
   }
 
+  drawCorner() {
+    this.drawHorizon();
+    this.drawVert(); 
+  }
+
   randomWall() {
     this.setRandomStartEnd();
-    let types = [this.drawVert, this.drawHorizon, this.drawDiagonal]
+    let types = [this.drawVert, this.drawHorizon, this.drawDiagonal, this.drawCorner]
     let wallType = ArrayUtil.sample(types);
     console.log(wallType)
     wallType.apply(this)
@@ -58,9 +64,10 @@ class Wall extends PhysObject {
       y: Math.floor(Math.random() * this.canvas.height)
     }
 
+    let direction = ArrayUtil.sample([-1,1])
     let end = {
-      x: start.x + ArrayUtil.sample(Defaults.wallLengths()),
-      y: start.y + ArrayUtil.sample(Defaults.wallLengths())
+      x: start.x + direction * ArrayUtil.sample(Defaults.wallLengths()),
+      y: start.y + direction * ArrayUtil.sample(Defaults.wallLengths())
     }
 
     this.pos = start

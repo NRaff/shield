@@ -31,29 +31,9 @@ class GameMap {
 
   // Draws barriers for the map. Barriers may be corners, slots, or walls
   drawBarriers() {
-    // while (this.walls.length < this.level) {
-
-    // }
-  }
-
-  //! Need to migrate the wall types into the wall class
-  // draws two walls that intersect to form a 90 degree angle
-  drawCorner() {
-    const options = Wall.setOptions(60,60,20,20)
-    const wall = new Wall(this.canvas, options);
-    wall.drawVertical();
-    wall.drawHorizontal();
-  }
-
-  // draws two walls that intersect like a V
-  drawSlot() {
-    const options = Wall.setOptions(100, 100, 20, 20)
-    let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
-    let wall = new Wall(this.canvas, options, endPos);
-    wall.drawDiagonal();
-    wall.endPos = { x: options.pos.x + 10, y: options.pos.y - 10 }
-    
-    wall.drawDiagonal();
+    while (this.walls.length < this.level) {
+      this.walls.push(this.drawWall());
+    }
   }
 
   // draws a flat while either horizontally or vertically (random)
@@ -62,6 +42,8 @@ class GameMap {
     // let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
     const wall = new Wall(this.canvas, options);
     wall.randomWall();
+    console.log(wall);
+    return wall;
   }
 }
 

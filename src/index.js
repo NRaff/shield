@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newTank = new Tank(shield);
   newTank.drawTank();
 
-  const gameMap = new GameMap(shield,1);
+  const gameMap = new GameMap(shield,10);
   gameMap.drawPortals();
-  // gameMap.drawCorner();
-  // gameMap.drawSlot();
-  gameMap.drawWall();
+  gameMap.drawBarriers();
 })
