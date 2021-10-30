@@ -10,16 +10,26 @@ class Wall extends PhysObject {
     // this.endPos = endPos
   }
 
-  //Draws a vertical wall when passed into the draw function
-  drawVertical() {
-    this.context.fillStyle = this.color;
-    this.context.fillRect(this.pos.x, this.pos.y,5,this.size.h)
+  drawVert() {
+    let ctx = this.context;
+    ctx.beginPath();
+    ctx.moveTo(this.pos.x, this.pos.y);
+    ctx.lineTo(this.pos.x + 5, this.pos.y);
+    ctx.lineTo(this.pos.x + 5, this.endPos.y);
+    ctx.lineTo(this.pos.x, this.endPos.y);
+    ctx.fillStyle = this.color;
+    ctx.fill();
   }
 
-  //Draws a horizontal wall when passed into the draw function
-  drawHorizontal() {
-    this.context.fillStyle = this.color;
-    this.context.fillRect(this.pos.x, this.pos.y, this.size.w, 5)
+  drawHorizon() {
+    let ctx = this.context;
+    ctx.beginPath();
+    ctx.moveTo(this.pos.x, this.pos.y);
+    ctx.lineTo(this.pos.x, this.pos.y + 5);
+    ctx.lineTo(this.endPos.x, this.pos.y + 5);
+    ctx.lineTo(this.endPos.x, this.pos.y);
+    ctx.fillStyle = this.color;
+    ctx.fill()
   }
 
   //Draws a diagonal wall
@@ -36,7 +46,7 @@ class Wall extends PhysObject {
 
   randomWall() {
     this.setRandomStartEnd();
-    let types = [this.drawVertical, this.drawHorizontal, this.drawDiagonal]
+    let types = [this.drawVert, this.drawHorizon, this.drawDiagonal]
     let wallType = ArrayUtil.sample(types);
     console.log(wallType)
     wallType.apply(this)

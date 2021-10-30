@@ -1,6 +1,6 @@
 const Defaults = {
   wallLengths () {
-    return [5, 10, 15, 20];
+    return [10, 20, 30, 40];
   }
 }
 
