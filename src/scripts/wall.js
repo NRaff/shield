@@ -1,3 +1,4 @@
+import ArrayUtil from "./ArrayUtil";
 import PhysObject from "./phys_object";
 
 class Wall extends PhysObject {
@@ -15,13 +16,12 @@ class Wall extends PhysObject {
   }
 
   //Draws a horizontal wall when passed into the draw function
-  drawHorizonal() {
+  drawHorizontal() {
     this.context.fillStyle = this.color;
     this.context.fillRect(this.pos.x, this.pos.y, this.size.w, 5)
   }
 
   //Draws a diagonal wall
-  //a^2 + b^2 = c^2
   drawDiagonal() {
     let ctx = this.context;
     ctx.beginPath();
@@ -31,8 +31,14 @@ class Wall extends PhysObject {
     ctx.lineTo(this.endPos.x + 5, this.endPos.y);
     ctx.fillStyle = this.color;
     ctx.fill();
-    ctx.cl
   }
+
+   randomWall() {
+    let types = [this.drawVertical, this.drawHorizontal, this.drawDiagonal]
+    let wallType = ArrayUtil.sample(types);
+    console.log(wallType)
+    wallType.apply(this)
+   }
 }
 
 export default Wall;
