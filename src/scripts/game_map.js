@@ -39,7 +39,6 @@ class GameMap {
   // draws a flat while either horizontally or vertically (random)
   drawWall() {
     const options = Wall.setDefaults();
-    // let endPos = { x: options.pos.x + 10, y: options.pos.y + 10 }
     const wall = new Wall(this.canvas, options);
     wall.randomWall();
     return wall;

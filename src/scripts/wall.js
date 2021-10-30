@@ -7,7 +7,6 @@ class Wall extends PhysObject {
   constructor(ctx, options) {
     super(ctx, options);
     this.color = 'darkgray'
-    // this.endPos = endPos
   }
 
   drawVert() {
@@ -73,9 +72,11 @@ class Wall extends PhysObject {
 
   randomWall() {
     this.setRandomStartEnd();
+    while (!this.inBounds()) {
+      this.setRandomStartEnd();
+    }
     let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
     let wallType = ArrayUtil.sample(types);
-    console.log(wallType)
     wallType.apply(this)
   }
 
@@ -90,10 +91,8 @@ class Wall extends PhysObject {
       x: start.x + direction * ArrayUtil.sample(Defaults.wallLengths()),
       y: start.y + direction * ArrayUtil.sample(Defaults.wallLengths())
     }
-
     this.pos = start
     this.endPos = end
-
   }
 }
 

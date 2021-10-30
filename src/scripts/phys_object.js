@@ -1,6 +1,3 @@
-import ArrayUtil from "./Utils/ArrayUtil";
-import Defaults from "./Utils/Defaults";
-
 class PhysObject {
   constructor(parent, options) {
     let goodOptions = options || PhysObject.setDefaults();
