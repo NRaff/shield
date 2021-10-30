@@ -30,7 +30,7 @@ Tech Stack
   - ✅ enemy
   - ✅ shield
   - ✅ tank
-  - board
+  - 🟡 board
 - Begin design of objects in the game
 #### Weekend
 - Complete objects design for tank, enemies, goals, map
