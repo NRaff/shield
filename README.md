@@ -35,7 +35,7 @@ Tech Stack
 #### Weekend
 - ✅ Complete objects design for tank, enemies, goals, map
 - ✅ Add player's tank
-- Connect tank to keyboard to enable movement around map
+- ✅ Connect tank to keyboard to enable movement around map
 #### Monday
 - Connect mouse action to shield angle
 - Enable collisions with map objects
