@@ -14,22 +14,9 @@ class Tank extends PhysObject {
   }
 
   drawTank() {
-    this.draw();
-    this.shield.draw();
-  }
-
-  redraw() {
-    // this.context.clearRect(this.pos.x, this.pos.y, 15, 15);
     this.shield.updatePos();
     this.draw();
-    this.shield.draw()
-  }
-  clearAround() {
-    console.log(this.size)
-    this.context.clearRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
-    this.context.clearRect(this.pos.x, this.pos.y, -this.size.w, this.size.h);
-    this.context.clearRect(this.pos.x, this.pos.y, this.size.w, -this.size.h);
-    this.context.clearRect(this.pos.x, this.pos.y, -this.size.w, -this.size.h);
+    this.shield.draw();
   }
 
   setControls() {

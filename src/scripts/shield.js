@@ -6,16 +6,30 @@ class Shield {
     this.parentPos = parentPos;
     this.pos = this.offset();
     this.color = color
-    this.arcType = arcType || ArcType.eighth;
+    this.arcType = arcType() || ArcType.eighth();
+    this.arcStart = arcType() || ArcType.eighth();
+    this.arcEnd = this.arcStart;
     this.parentSize = parentSize
   }
   draw() {
     let ctx = this.ctx;
     let shield = new Path2D();
-    shield.arc(this.pos.x, this.pos.y, this.getRadius(), this.arcType(), -this.arcType(), true);
+    shield.arc(
+      this.pos.x,
+      this.pos.y,
+      this.getRadius(),
+      this.arcStart, 
+      -this.arcEnd,
+      true
+    );
     shield.lineWidth = 2;
     ctx.strokeStyle = this.color;
     ctx.stroke(shield)
+  }
+
+  newAngle(angle) {
+    this.arcStart = angle + ArcType.eighth();
+    this.arcEnd = -this.arcStart + ArcType.quarter();
   }
 
   offset(){
