@@ -41,8 +41,10 @@ class PhysObject {
 
   //Draws the set object
   setObj() {
+    let obj = new Path2D();
+    obj.rect(this.pos.x,this.pos.y,this.size.w, this.size.h)
     this.context.fillStyle = this.color;
-    this.context.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+    this.context.fill(obj);
   }
 
   static setDefaults() {

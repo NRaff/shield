@@ -10,9 +10,11 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
-    this.drawPortals();
-    this.startTank();
-    this.drawBarriers();
+    this.tank = this.setupTank();
+    // this.drawPortals();
+    // this.startTank();
+    // this.drawBarriers();
+    this.startMap();
   }
 
   // draws the tank at a given start position
@@ -20,6 +22,31 @@ class GameMap {
     let options = Tank.setOptions(this.getStartPos(), 10,10, 'darkgreen', this.getStartPos());
     let tank = new Tank(this.canvas, options)
     tank.drawTank();
+  }
+
+  redrawMap() {
+    this.ctx.clearRect(0,0,this.width,this.height);
+    this.tank.redraw();
+    this.drawPortals();
+  }
+
+  startMap() {
+    this.tank.drawTank();
+    this.drawPortals();
+    this.canvas.addEventListener('keydown', (keyEvent) => {
+      let keyPressed = keyEvent.key
+      if (Object.keys(this.tank.controls).includes(keyPressed)) {
+        // this.clearAround()
+        this.tank.controls[keyPressed]()
+      }
+      window.requestAnimationFrame(this.redrawMap.bind(this));
+    })
+  }
+
+  setupTank(){
+    let options = Tank.setOptions(this.getStartPos(), 10, 10, 'darkgreen', this.getStartPos());
+    let tank = new Tank(this.canvas, options)
+    return tank;
   }
 
   getStartPos() {

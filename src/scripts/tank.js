@@ -8,7 +8,7 @@ class Tank extends PhysObject {
     super(ctx, options);
     this.color = 'darkgreen';
     this.shield = new Shield(this.context, this.pos,'cyan',ArcType.eighth,this.size);
-    this.speed = {x: 15, y: 15};
+    this.speed = {x: 5, y: 5};
     this.controls = this.setControls();
 
   }
@@ -16,26 +16,20 @@ class Tank extends PhysObject {
   drawTank() {
     this.draw();
     this.shield.draw();
-    this.canvas.addEventListener('keydown', (keyEvent) => {
-      let keyPressed = keyEvent.key
-      if (Object.keys(this.controls).includes(keyPressed)) { 
-        this.clearAround()
-        this.controls[keyPressed]()
-      }
-      window.requestAnimationFrame(this.redraw.bind(this));
-    })
   }
 
   redraw() {
+    // this.context.clearRect(this.pos.x, this.pos.y, 15, 15);
     this.shield.updatePos();
     this.draw();
     this.shield.draw()
   }
   clearAround() {
-    this.context.clearRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
-    this.context.clearRect(this.pos.x, this.pos.y, -this.size.x, this.size.y);
-    this.context.clearRect(this.pos.x, this.pos.y, this.size.x, -this.size.y);
-    this.context.clearRect(this.pos.x, this.pos.y, -this.size.x, -this.size.y);
+    console.log(this.size)
+    this.context.clearRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
+    this.context.clearRect(this.pos.x, this.pos.y, -this.size.w, this.size.h);
+    this.context.clearRect(this.pos.x, this.pos.y, this.size.w, -this.size.h);
+    this.context.clearRect(this.pos.x, this.pos.y, -this.size.w, -this.size.h);
   }
 
   setControls() {

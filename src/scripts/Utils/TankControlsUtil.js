@@ -1,3 +1,5 @@
+// tank controls are bound when the tank is first drawn...'this' is interpreted as 
+// the tank object
 const TankControlsUtil = {
   moveUp() {
     this.pos.y -= this.speed.y;

@@ -11,11 +11,11 @@ class Shield {
   }
   draw() {
     let ctx = this.ctx;
-    ctx.beginPath();
-    ctx.arc(this.pos.x, this.pos.y, this.getRadius(),this.arcType(),-this.arcType(),true);
+    let shield = new Path2D();
+    shield.arc(this.pos.x, this.pos.y, this.getRadius(), this.arcType(), -this.arcType(), true);
+    shield.lineWidth = 2;
     ctx.strokeStyle = this.color;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    ctx.stroke(shield)
   }
 
   offset(){
