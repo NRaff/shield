@@ -37,7 +37,7 @@ Tech Stack
 - ✅ Add player's tank
 - ✅ Connect tank to keyboard to enable movement around map
 #### Monday
-- Connect mouse action to shield angle
+- ✅ Connect mouse action to shield angle
 - Enable collisions with map objects
 - Add Enemies
 - Allow enemies to fire projectiles

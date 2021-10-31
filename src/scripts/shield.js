@@ -28,6 +28,8 @@ class Shield {
   }
 
   newAngle(angle) {
+    // set the shields arc start to half the mouse angle
+    // set the sheilds arc end to the start angle + 90
     this.arcStart = angle + ArcType.eighth();
     this.arcEnd = -this.arcStart + ArcType.quarter();
   }

@@ -7,6 +7,7 @@ class Wall extends PhysObject {
   constructor(ctx, options) {
     super(ctx, options);
     this.color = 'darkgray'
+    this.path;
   }
 
   drawVert() {
@@ -59,15 +60,18 @@ class Wall extends PhysObject {
     // 1 is a corner facing right
     let direction = ArrayUtil.sample([-1, 1])
     let ctx = this.context
+    let corner = new Path2D()
     ctx.beginPath();
-    ctx.moveTo(this.pos.x, this.pos.y);
-    ctx.lineTo(this.endPos.x, this.pos.y);
-    ctx.lineTo(this.endPos.x, this.pos.y + direction * 5);
-    ctx.lineTo(this.pos.x + direction * 5, this.pos.y + direction * 5);
-    ctx.lineTo(this.pos.x + direction * 5, this.endPos.y);
-    ctx.lineTo(this.pos.x, this.endPos.y);
+    corner.moveTo(this.pos.x, this.pos.y);
+    corner.lineTo(this.endPos.x, this.pos.y);
+    corner.lineTo(this.endPos.x, this.pos.y + direction * 5);
+    corner.lineTo(this.pos.x + direction * 5, this.pos.y + direction * 5);
+    corner.lineTo(this.pos.x + direction * 5, this.endPos.y);
+    corner.lineTo(this.pos.x, this.endPos.y);
+    this.path = corner;
     ctx.fillStyle = this.color;
-    ctx.fill()
+    ctx.fill(corner)
+    return this;
   }
 
   randomWall() {
@@ -75,7 +79,7 @@ class Wall extends PhysObject {
     while (!this.inBounds()) {
       this.setRandomStartEnd();
     }
-    let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
+    let types = [/*this.drawVert, this.drawHorizon, this.drawTriangle,*/ this.drawCorner]
     let wallType = ArrayUtil.sample(types);
     wallType.apply(this)
   }

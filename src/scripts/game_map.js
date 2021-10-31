@@ -22,17 +22,17 @@ class GameMap {
     this.ctx.clearRect(0,0,this.width,this.height);
     this.tank.drawTank();
     this.drawPortals();
+    this.redrawBarriers();
   }
 
   startMap() {
     this.tank.drawTank();
     this.drawPortals();
+    this.drawBarriers();
     // add keyboard controls listener
     this.canvas.addEventListener('keydown', (keyEvent) => {
-      console.log(keyEvent)
       let keyPressed = keyEvent.key
       if (Object.keys(this.tank.controls).includes(keyPressed)) {
-        // this.clearAround()
         this.tank.controls[keyPressed]()
         this.tank.shield.newAngle(this.mouseAngle())
       }
@@ -41,8 +41,6 @@ class GameMap {
 
     // add mouse controls listener
     this.canvas.addEventListener('mousemove', (e) => {
-      // set the shields arc start to half the mouse angle
-      // set the sheilds arc end to the start angle + 45
       this.setMousePos(e)
       this.tank.shield.newAngle(this.mouseAngle());
       window.requestAnimationFrame(this.redrawMap.bind(this));
@@ -106,6 +104,12 @@ class GameMap {
     while (this.walls.length < this.level) {
       this.walls.push(this.drawWall());
     }
+  }
+
+  redrawBarriers() {
+    this.walls.forEach((wall) => {
+      this.ctx.fill(wall.path);
+    })
   }
 
   // draws a flat while either horizontally or vertically (random)
