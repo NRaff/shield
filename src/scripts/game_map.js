@@ -10,6 +10,9 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
+    this.drawPortals();
+    this.startTank();
+    this.drawBarriers();
   }
 
   // draws the tank at a given start position
@@ -27,7 +30,7 @@ class GameMap {
   }
 
   // Draws the start and end areas of the map
-  drawPortals(x, y) {
+  drawPortals() {
     this.drawPortal(0,this.height / 2);
     this.drawPortal(this.width, this.height / 2);
   }

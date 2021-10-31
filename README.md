@@ -30,11 +30,11 @@ Tech Stack
   - ✅ enemy
   - ✅ shield
   - ✅ tank
-  - 🟡 board
+  - ✅ board
 - Begin design of objects in the game
 #### Weekend
-- Complete objects design for tank, enemies, goals, map
-- Add player's tank
+- ✅ Complete objects design for tank, enemies, goals, map
+- ✅ Add player's tank
 - Connect tank to keyboard to enable movement around map
 #### Monday
 - Connect mouse action to shield angle
