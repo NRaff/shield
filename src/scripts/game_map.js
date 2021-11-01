@@ -31,8 +31,9 @@ class GameMap {
   startMap() {
     this.tank.drawTank();
     this.drawPortals();
-    this.drawBarriers();
-    this.drawEnemies();
+    this.enemies = Enemy.drawEnemies.call(this, this.level);
+    this.walls = Wall.drawWalls.call(this, this.level);
+
     // add keyboard controls listener
     this.canvas.addEventListener('keydown', (keyEvent) => {
       let keyPressed = keyEvent.key
@@ -78,8 +79,6 @@ class GameMap {
   }
 
   getStartPos() {
-    console.log(this.height)
-    console.log(this.width)
     return {
       x: 5,
       y: this.height / 2 - 5 // -5 centers it since the size is an offset
@@ -103,13 +102,6 @@ class GameMap {
     ctx.stroke();
   }
 
-  // Draws barriers for the map. Barriers may be corners, slots, or walls
-  drawBarriers() {
-    while (this.walls.length < this.level) {
-      this.walls.push(this.drawWall());
-    }
-  }
-
   redrawBarriers() {
     this.walls.forEach((wall) => {
       this.ctx.fillStyle = wall.color;
@@ -117,32 +109,11 @@ class GameMap {
     })
   }
 
-  // draws a flat while either horizontally or vertically (random)
-  drawWall() {
-    const options = Wall.setDefaults();
-    const wall = new Wall(this.canvas, options);
-    wall.randomWall();
-    return wall;
-  }
-
   redrawEnemies() {
     this.enemies.forEach((enemy) => {
       this.ctx.fillStyle = enemy.color;
       this.ctx.fill(enemy.path);
     })
-  }
-
-  drawEnemies() {
-    while (this.enemies.length < this.level) {
-      this.enemies.push(this.drawEnemy());
-    }
-  }
-
-  drawEnemy() {
-    let enemy = new Enemy(this.canvas);
-    enemy.setRandomStartEnd();
-    enemy.draw();
-    return enemy;
   }
 }
 

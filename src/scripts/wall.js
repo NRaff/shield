@@ -79,14 +79,26 @@ class Wall extends PhysObject {
     return this;
   }
 
-  randomWall() {
-    this.setRandomStartEnd();
-    while (!this.inBounds()) {
-      this.setRandomStartEnd();
+  static randomWall() {
+    const options = Wall.setDefaults();
+    const wall = new Wall(this.canvas, options);
+    wall.setRandomStartEnd();
+    while(!wall.inBounds()) {
+      wall.setRandomStartEnd();
     }
-    let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
+    let types = [wall.drawVert, wall.drawHorizon, wall.drawTriangle, wall.drawCorner]
     let wallType = ArrayUtil.sample(types);
-    wallType.apply(this)
+    wallType.apply(wall)
+    return wall;
+  }
+
+  static drawWalls(num) {
+    let walls = [];
+    let drawFunc = Wall.randomWall.bind(this);
+    while (walls.length < num) {
+      walls.push(drawFunc());
+    }
+    return walls
   }
 }
 
