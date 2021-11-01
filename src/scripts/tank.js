@@ -24,7 +24,11 @@ class Tank extends PhysObject {
       'w': TankControlsUtil.moveUp.bind(this),
       'a': TankControlsUtil.moveLeft.bind(this),
       's': TankControlsUtil.moveDown.bind(this),
-      'd': TankControlsUtil.moveRight.bind(this)
+      'd': TankControlsUtil.moveRight.bind(this),
+      'ArrowUp': TankControlsUtil.moveUp.bind(this),
+      'ArrowLeft': TankControlsUtil.moveLeft.bind(this),
+      'ArrowDown': TankControlsUtil.moveDown.bind(this),
+      'ArrowRight': TankControlsUtil.moveRight.bind(this)
     }
   }
 

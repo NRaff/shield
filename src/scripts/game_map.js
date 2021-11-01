@@ -1,6 +1,7 @@
 import Enemy from "./enemy";
 import Tank from "./tank";
 import ArcType from "./Utils/ArcType";
+import PlayerEvents from "./Utils/PlayerEvents";
 import Wall from "./wall";
 
 class GameMap {
@@ -33,23 +34,8 @@ class GameMap {
     this.drawPortals();
     this.enemies = Enemy.drawEnemies.call(this, this.level);
     this.walls = Wall.drawWalls.call(this, this.level);
-
-    // add keyboard controls listener
-    this.canvas.addEventListener('keydown', (keyEvent) => {
-      let keyPressed = keyEvent.key
-      if (Object.keys(this.tank.controls).includes(keyPressed)) {
-        this.tank.controls[keyPressed]()
-        this.tank.shield.newAngle(this.mouseAngle())
-      }
-      window.requestAnimationFrame(this.redrawMap.bind(this));
-    })
-
-    // add mouse controls listener
-    this.canvas.addEventListener('mousemove', (e) => {
-      this.setMousePos(e)
-      this.tank.shield.newAngle(this.mouseAngle());
-      window.requestAnimationFrame(this.redrawMap.bind(this));
-    })
+    this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
+    this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));
   }
 
   mouseAngle() {
