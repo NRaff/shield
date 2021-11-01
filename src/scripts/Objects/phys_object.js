@@ -55,6 +55,7 @@ class PhysObject {
   setPath() {
     let obj = new Path2D();
     obj.rect(this.pos.x, this.pos.y, this.size.w, this.size.h)
+    obj.closePath();
     this.path = obj;
   }
 

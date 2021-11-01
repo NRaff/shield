@@ -7,6 +7,7 @@ class Portal {
     this.ctx = this.canvas.getContext('2d');
     this.color = color;
     this.side = side;
+    this.pos;
     this.path;
   }
 
@@ -30,15 +31,15 @@ class Portal {
 
   setPath() {
     let portal = new Path2D();
-    let pos = this.side === 'start' ? this.getStartPos() : this.getEndPos();
-    console.log(pos)
+    this.pos = this.side === 'start' ? this.getStartPos() : this.getEndPos();
     portal.arc(
-      pos.x,
-      pos.y,
+      this.pos.x,
+      this.pos.y,
       Defaults.portalRadius(),
       0,
       ArcType.full()
     )
+    portal.closePath();
     this.path = portal;
   }
 

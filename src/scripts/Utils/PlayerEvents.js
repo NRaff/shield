@@ -5,6 +5,8 @@ const PlayerEvents = {
     if (Object.keys(this.tank.controls).includes(keyPressed)) {
       this.tank.controls[keyPressed]()
       this.tank.shield.newAngle(this.mouseAngle())
+      this.detectCollision();
+      
     }
     window.requestAnimationFrame(this.redrawMap.bind(this));
   },

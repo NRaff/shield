@@ -30,17 +30,17 @@ class GameMap {
     this.redrawPortals();
     this.redrawBarriers();
     this.redrawEnemies();
+    // this.detectCollision();
   }
 
   startMap() {
     this.tank.drawTank();
-    // this.drawPortals();
     this.portals = Portal.drawPortals.call(this)
-    console.log(this.portals)
     this.enemies = Enemy.drawEnemies.call(this, this.level);
     this.walls = Wall.drawWalls.call(this, this.level);
     this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
     this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));
+    // this.detectCollision();
   }
 
   mouseAngle() {
@@ -80,6 +80,7 @@ class GameMap {
     this.walls.forEach((wall) => {
       this.ctx.fillStyle = wall.color;
       this.ctx.fill(wall.path);
+      
     })
   }
 
@@ -95,6 +96,27 @@ class GameMap {
       portal.draw();
     })
   }
+
+  detectCollision() {
+    let tankCorners = {
+      tl: {x: this.tank.pos.x, y: this.tank.pos.y},
+      tr: {x: this.tank.pos.x + Defaults.tankSize().w, y: this.tank.pos.y},
+      bl: {x: this.tank.pos.x, y: this.tank.pos.y + Defaults.tankSize().h},
+      br: {x: this.tank.pos.x + Defaults.tankSize().w, y: this.tank.pos.y + Defaults.tankSize().h}
+    }
+
+    let allObjects = this.portals.concat(this.walls, this.enemies)
+    for (let obj of allObjects) {
+      Object.keys(tankCorners).some((key) => {
+        let corner = tankCorners[key]
+        if (this.ctx.isPointInPath(obj.path, corner.x, corner.y)) {
+          console.log(`There was a collision with between corner: ${key} and a ${obj.constructor.name}`);
+        }
+      })
+      
+    }
+  }
 }
+
 
 export default GameMap;

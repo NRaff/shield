@@ -41,6 +41,7 @@ class Shield {
       true
     );
     shield.lineWidth = Defaults.shieldLineWidth();
+    shield.closePath();
     this.path = shield;
   }
 

@@ -17,6 +17,7 @@ class Wall extends PhysObject {
     vertical.lineTo(this.pos.x + Defaults.wallWidth(), this.pos.y);
     vertical.lineTo(this.pos.x + Defaults.wallWidth(), this.endPos.y);
     vertical.lineTo(this.pos.x, this.endPos.y);
+    vertical.closePath();
     this.path = vertical;
     ctx.fillStyle = this.color;
     ctx.fill(vertical);
@@ -30,6 +31,7 @@ class Wall extends PhysObject {
     horizontal.lineTo(this.pos.x, this.pos.y + Defaults.wallWidth());
     horizontal.lineTo(this.endPos.x, this.pos.y + Defaults.wallWidth());
     horizontal.lineTo(this.endPos.x, this.pos.y);
+    horizontal.closePath();
     this.path = horizontal;
     ctx.fillStyle = this.color;
     ctx.fill(horizontal)
@@ -45,6 +47,7 @@ class Wall extends PhysObject {
     diagonal.lineTo(this.pos.x + offset, this.pos.y); //add width to the line
     diagonal.lineTo(this.endPos.x, this.endPos.y);
     diagonal.lineTo(this.endPos.x + offset * -1, this.endPos.y);
+    diagonal.closePath();
     ctx.fillStyle = this.color;
     ctx.fill(diagonal);
   }
@@ -56,6 +59,7 @@ class Wall extends PhysObject {
     triangle.moveTo(this.pos.x, this.pos.y);
     triangle.lineTo(this.endPos.x, this.pos.y);
     triangle.lineTo(this.pos.x, this.endPos.y)
+    triangle.closePath();
     this.path = triangle;
     ctx.fillStyle = this.color;
     ctx.fill(triangle);
@@ -74,10 +78,11 @@ class Wall extends PhysObject {
     corner.lineTo(this.pos.x + direction * Defaults.wallWidth(), this.pos.y + direction * Defaults.wallWidth());
     corner.lineTo(this.pos.x + direction * Defaults.wallWidth(), this.endPos.y);
     corner.lineTo(this.pos.x, this.endPos.y);
+    corner.closePath();
     this.path = corner;
     ctx.fillStyle = this.color;
     ctx.fill(corner)
-    return this;
+    // return this;
   }
 
   static randomWall() {
