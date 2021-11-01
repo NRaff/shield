@@ -39,7 +39,7 @@ Tech Stack
 #### Monday
 - ✅ Connect mouse action to shield angle
 - Enable collisions with map objects
-- Add Enemies
+- ✅ Add Enemies
 - Allow enemies to fire projectiles
 - Enable collisions with projectiles
 #### Tuesday
