@@ -27,7 +27,7 @@ const Defaults = {
   },
 
   shieldLineWidth() {
-    return 2;
+    return 1;
   },
 
   shieldOffset() {

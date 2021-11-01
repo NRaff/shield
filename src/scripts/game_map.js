@@ -4,6 +4,7 @@ import ArcType from "./Utils/ArcType";
 import PlayerEvents from "./Utils/PlayerEvents";
 import Wall from "./Objects/wall";
 import Defaults from "./Utils/Defaults";
+import Portal from "./Objects/portal";
 
 class GameMap {
   constructor(canvas, level) {
@@ -14,6 +15,7 @@ class GameMap {
     this.ctx = this.canvas.getContext('2d');
     this.walls = [];
     this.enemies = [];
+    this.portals = [];
     this.tank = this.setupTank();
     this.startMap();
     this.mousePos = {
@@ -25,14 +27,16 @@ class GameMap {
   redrawMap() {
     this.ctx.clearRect(0,0,this.width,this.height);
     this.tank.drawTank();
-    this.drawPortals();
+    this.redrawPortals();
     this.redrawBarriers();
     this.redrawEnemies();
   }
 
   startMap() {
     this.tank.drawTank();
-    this.drawPortals();
+    // this.drawPortals();
+    this.portals = Portal.drawPortals.call(this)
+    console.log(this.portals)
     this.enemies = Enemy.drawEnemies.call(this, this.level);
     this.walls = Wall.drawWalls.call(this, this.level);
     this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
@@ -72,20 +76,6 @@ class GameMap {
     }
   }
 
-  drawPortals() {
-    this.drawPortal(0,this.height / 2);
-    this.drawPortal(this.width, this.height / 2);
-  }
-
-  drawPortal(x, y) {
-    let ctx = this.ctx;
-    ctx.beginPath();
-    ctx.arc(x, y, Defaults.portalRadius(), 0, ArcType.full());
-    ctx.strokeStyle = 'blue';
-    ctx.lineWidth = Defaults.portalLineWidth();
-    ctx.stroke();
-  }
-
   redrawBarriers() {
     this.walls.forEach((wall) => {
       this.ctx.fillStyle = wall.color;
@@ -97,6 +87,12 @@ class GameMap {
     this.enemies.forEach((enemy) => {
       this.ctx.fillStyle = enemy.color;
       this.ctx.fill(enemy.path);
+    })
+  }
+
+  redrawPortals() {
+    this.portals.forEach((portal) => {
+      portal.draw();
     })
   }
 }

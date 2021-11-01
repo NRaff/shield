@@ -10,22 +10,38 @@ class Shield {
     this.arcType = arcType() || ArcType.eighth();
     this.arcStart = arcType() || ArcType.eighth();
     this.arcEnd = this.arcStart;
-    this.parentSize = parentSize
+    this.parentSize = parentSize;
+    this.path;
   }
-  draw() {
-    let ctx = this.ctx;
+  // draw() {
+  //   let ctx = this.ctx;
+  //   let shield = new Path2D();
+  //   shield.arc(
+  //     this.pos.x,
+  //     this.pos.y,
+  //     this.getRadius(),
+  //     this.arcStart, 
+  //     -this.arcEnd,
+  //     true
+  //   );
+  //   shield.lineWidth = Defaults.shieldLineWidth();
+  //   this.path = shield;
+  //   ctx.strokeStyle = this.color;
+  //   ctx.stroke(shield)
+  // }
+
+  setPath() {
     let shield = new Path2D();
     shield.arc(
       this.pos.x,
       this.pos.y,
       this.getRadius(),
-      this.arcStart, 
+      this.arcStart,
       -this.arcEnd,
       true
     );
     shield.lineWidth = Defaults.shieldLineWidth();
-    ctx.strokeStyle = this.color;
-    ctx.stroke(shield)
+    this.path = shield;
   }
 
   newAngle(angle) {

@@ -9,6 +9,7 @@ class Enemy extends PhysObject {
   static drawEnemy() {
     let enemy = new Enemy(this.canvas);
     enemy.setRandomStartEnd();
+    enemy.setPath();
     enemy.draw();
     return enemy;
   }
