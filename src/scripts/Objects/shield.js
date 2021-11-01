@@ -1,4 +1,5 @@
 import ArcType from '../Utils/ArcType'
+import Defaults from '../Utils/Defaults';
 
 class Shield {
   constructor(ctx, parentPos, color, arcType, parentSize) {
@@ -22,7 +23,7 @@ class Shield {
       -this.arcEnd,
       true
     );
-    shield.lineWidth = 2;
+    shield.lineWidth = Defaults.shieldLineWidth();
     ctx.strokeStyle = this.color;
     ctx.stroke(shield)
   }
@@ -36,14 +37,14 @@ class Shield {
 
   offset(){
     return {
-      x: this.parentPos.x + 5,
-      y: this.parentPos.y + 5
+      x: this.parentPos.x + Defaults.shieldOffset(),
+      y: this.parentPos.y + Defaults.shieldOffset()
     };
   }
 
   updatePos(){
-    this.pos.x = this.parentPos.x + 5,
-    this.pos.y = this.parentPos.y + 5
+    this.pos.x = this.parentPos.x + Defaults.shieldOffset(),
+    this.pos.y = this.parentPos.y + Defaults.shieldOffset()
   }
 
   getRadius() {

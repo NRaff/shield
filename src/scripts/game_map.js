@@ -3,6 +3,7 @@ import Tank from "./Objects/tank";
 import ArcType from "./Utils/ArcType";
 import PlayerEvents from "./Utils/PlayerEvents";
 import Wall from "./Objects/wall";
+import Defaults from "./Utils/Defaults";
 
 class GameMap {
   constructor(canvas, level) {
@@ -11,7 +12,7 @@ class GameMap {
     this.width = this.canvas.width;
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
-    this.walls = []; // need to keep track of all objects on the page
+    this.walls = [];
     this.enemies = [];
     this.tank = this.setupTank();
     this.startMap();
@@ -39,8 +40,8 @@ class GameMap {
   }
 
   mouseAngle() {
-    let mouseDist = this.mousePos.x - this.tank.pos.x//this.tank.pos.x - mouseX;
-    let mouseHeight = this.mousePos.y - this.tank.pos.y//this.tank.pos.y - mouseY;
+    let mouseDist = this.mousePos.x - this.tank.pos.x
+    let mouseHeight = this.mousePos.y - this.tank.pos.y
     let angle = Math.atan2(mouseHeight, mouseDist);
     return angle;
   }
@@ -51,7 +52,7 @@ class GameMap {
     let scaleX = this.canvas.width / boundOffset.width;
     let scaleY = this.canvas.width / boundOffset.height;
     let mouseX = (e.clientX - boundOffset.left) * scaleX;
-    let mouseY = (e.clientY - boundOffset.top) * scaleY - 70;
+    let mouseY = (e.clientY - boundOffset.top) * scaleY + Defaults.canvasOffset();
     this.mousePos = {
       x: mouseX,
       y: mouseY
@@ -59,7 +60,7 @@ class GameMap {
   }
 
   setupTank(){
-    let options = Tank.setOptions(this.getStartPos(), 10, 10, 'darkgreen', this.getStartPos());
+    let options = Tank.setOptions(this.getStartPos(), Defaults.tankSize().w, Defaults.tankSize().h, 'darkgreen', this.getStartPos());
     let tank = new Tank(this.canvas, options)
     return tank;
   }
@@ -67,24 +68,21 @@ class GameMap {
   getStartPos() {
     return {
       x: 5,
-      y: this.height / 2 - 5 // -5 centers it since the size is an offset
+      y: this.height / 2 + Defaults.centerYOffset()
     }
   }
 
-  // Draws the start and end areas of the map
   drawPortals() {
     this.drawPortal(0,this.height / 2);
     this.drawPortal(this.width, this.height / 2);
   }
 
-  //draws a single portal at the x,y position
-  //will draw a full circle, and can therefore be place anywhere
   drawPortal(x, y) {
     let ctx = this.ctx;
     ctx.beginPath();
-    ctx.arc(x, y, 30, 0, ArcType.full());
+    ctx.arc(x, y, Defaults.portalRadius(), 0, ArcType.full());
     ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = Defaults.portalLineWidth();
     ctx.stroke();
   }
 

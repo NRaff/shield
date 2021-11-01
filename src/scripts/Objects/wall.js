@@ -1,4 +1,5 @@
 import ArrayUtil from "../Utils/ArrayUtil";
+import Defaults from "../Utils/Defaults";
 import PhysObject from "./phys_object";
 
 class Wall extends PhysObject {
@@ -13,8 +14,8 @@ class Wall extends PhysObject {
     let vertical = new Path2D();
     ctx.beginPath();
     vertical.moveTo(this.pos.x, this.pos.y);
-    vertical.lineTo(this.pos.x + 5, this.pos.y);
-    vertical.lineTo(this.pos.x + 5, this.endPos.y);
+    vertical.lineTo(this.pos.x + Defaults.wallWidth(), this.pos.y);
+    vertical.lineTo(this.pos.x + Defaults.wallWidth(), this.endPos.y);
     vertical.lineTo(this.pos.x, this.endPos.y);
     this.path = vertical;
     ctx.fillStyle = this.color;
@@ -26,8 +27,8 @@ class Wall extends PhysObject {
     let horizontal = new Path2D();
     ctx.beginPath();
     horizontal.moveTo(this.pos.x, this.pos.y);
-    horizontal.lineTo(this.pos.x, this.pos.y + 5);
-    horizontal.lineTo(this.endPos.x, this.pos.y + 5);
+    horizontal.lineTo(this.pos.x, this.pos.y + Defaults.wallWidth());
+    horizontal.lineTo(this.endPos.x, this.pos.y + Defaults.wallWidth());
     horizontal.lineTo(this.endPos.x, this.pos.y);
     this.path = horizontal;
     ctx.fillStyle = this.color;
@@ -69,9 +70,9 @@ class Wall extends PhysObject {
     ctx.beginPath();
     corner.moveTo(this.pos.x, this.pos.y);
     corner.lineTo(this.endPos.x, this.pos.y);
-    corner.lineTo(this.endPos.x, this.pos.y + direction * 5);
-    corner.lineTo(this.pos.x + direction * 5, this.pos.y + direction * 5);
-    corner.lineTo(this.pos.x + direction * 5, this.endPos.y);
+    corner.lineTo(this.endPos.x, this.pos.y + direction * Defaults.wallWidth());
+    corner.lineTo(this.pos.x + direction * Defaults.wallWidth(), this.pos.y + direction * Defaults.wallWidth());
+    corner.lineTo(this.pos.x + direction * Defaults.wallWidth(), this.endPos.y);
     corner.lineTo(this.pos.x, this.endPos.y);
     this.path = corner;
     ctx.fillStyle = this.color;
