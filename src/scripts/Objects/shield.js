@@ -1,4 +1,4 @@
-import ArcType from './Utils/ArcType'
+import ArcType from '../Utils/ArcType'
 
 class Shield {
   constructor(ctx, parentPos, color, arcType, parentSize) {

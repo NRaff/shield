@@ -1,5 +1,5 @@
-import ArrayUtil from "./Utils/ArrayUtil";
-import Defaults from "./Utils/Defaults";
+import ArrayUtil from "../Utils/ArrayUtil";
+import Defaults from "../Utils/Defaults";
 
 class PhysObject {
   constructor(parent, options) {

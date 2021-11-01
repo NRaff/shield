@@ -1,7 +1,7 @@
-import ArcType from "./Utils/ArcType";
+import ArcType from "../Utils/ArcType";
 import PhysObject from "./phys_object";
 import Shield from "./shield";
-import TankControlsUtil from "./Utils/TankControlsUtil";
+import TankControlsUtil from "../Utils/TankControlsUtil";
 
 class Tank extends PhysObject {
   constructor(ctx, options) {

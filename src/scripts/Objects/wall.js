@@ -1,4 +1,4 @@
-import ArrayUtil from "./Utils/ArrayUtil";
+import ArrayUtil from "../Utils/ArrayUtil";
 import PhysObject from "./phys_object";
 
 class Wall extends PhysObject {

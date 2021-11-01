@@ -1,8 +1,8 @@
-import Enemy from "./enemy";
-import Tank from "./tank";
+import Enemy from "./Objects/enemy";
+import Tank from "./Objects/tank";
 import ArcType from "./Utils/ArcType";
 import PlayerEvents from "./Utils/PlayerEvents";
-import Wall from "./wall";
+import Wall from "./Objects/wall";
 
 class GameMap {
   constructor(canvas, level) {
