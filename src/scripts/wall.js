@@ -12,47 +12,54 @@ class Wall extends PhysObject {
 
   drawVert() {
     let ctx = this.context;
+    let vertical = new Path2D();
     ctx.beginPath();
-    ctx.moveTo(this.pos.x, this.pos.y);
-    ctx.lineTo(this.pos.x + 5, this.pos.y);
-    ctx.lineTo(this.pos.x + 5, this.endPos.y);
-    ctx.lineTo(this.pos.x, this.endPos.y);
+    vertical.moveTo(this.pos.x, this.pos.y);
+    vertical.lineTo(this.pos.x + 5, this.pos.y);
+    vertical.lineTo(this.pos.x + 5, this.endPos.y);
+    vertical.lineTo(this.pos.x, this.endPos.y);
+    this.path = vertical;
     ctx.fillStyle = this.color;
-    ctx.fill();
+    ctx.fill(vertical);
   }
 
   drawHorizon() {
     let ctx = this.context;
+    let horizontal = new Path2D();
     ctx.beginPath();
-    ctx.moveTo(this.pos.x, this.pos.y);
-    ctx.lineTo(this.pos.x, this.pos.y + 5);
-    ctx.lineTo(this.endPos.x, this.pos.y + 5);
-    ctx.lineTo(this.endPos.x, this.pos.y);
+    horizontal.moveTo(this.pos.x, this.pos.y);
+    horizontal.lineTo(this.pos.x, this.pos.y + 5);
+    horizontal.lineTo(this.endPos.x, this.pos.y + 5);
+    horizontal.lineTo(this.endPos.x, this.pos.y);
+    this.path = horizontal;
     ctx.fillStyle = this.color;
-    ctx.fill()
+    ctx.fill(horizontal)
   }
 
   //Draws a diagonal wall
   drawDiagonal() {
     let ctx = this.context;
     let offset = ArrayUtil.sample([-5,5])
+    let diagonal = new Path2D()
     ctx.beginPath();
-    ctx.moveTo(this.pos.x,this.pos.y); //set the start position from the wall
-    ctx.lineTo(this.pos.x + offset, this.pos.y); //add width to the line
-    ctx.lineTo(this.endPos.x, this.endPos.y);
-    ctx.lineTo(this.endPos.x + offset * -1, this.endPos.y);
+    diagonal.moveTo(this.pos.x,this.pos.y); //set the start position from the wall
+    diagonal.lineTo(this.pos.x + offset, this.pos.y); //add width to the line
+    diagonal.lineTo(this.endPos.x, this.endPos.y);
+    diagonal.lineTo(this.endPos.x + offset * -1, this.endPos.y);
     ctx.fillStyle = this.color;
-    ctx.fill();
+    ctx.fill(diagonal);
   }
 
   drawTriangle() {
     let ctx = this.context;
+    let triangle = new Path2D();
     ctx.beginPath();
-    ctx.moveTo(this.pos.x, this.pos.y);
-    ctx.lineTo(this.endPos.x, this.pos.y);
-    ctx.lineTo(this.pos.x, this.endPos.y)
+    triangle.moveTo(this.pos.x, this.pos.y);
+    triangle.lineTo(this.endPos.x, this.pos.y);
+    triangle.lineTo(this.pos.x, this.endPos.y)
+    this.path = triangle;
     ctx.fillStyle = this.color;
-    ctx.fill();
+    ctx.fill(triangle);
   }
 
   drawCorner() {
@@ -79,7 +86,7 @@ class Wall extends PhysObject {
     while (!this.inBounds()) {
       this.setRandomStartEnd();
     }
-    let types = [/*this.drawVert, this.drawHorizon, this.drawTriangle,*/ this.drawCorner]
+    let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
     let wallType = ArrayUtil.sample(types);
     wallType.apply(this)
   }
