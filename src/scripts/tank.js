@@ -8,7 +8,7 @@ class Tank extends PhysObject {
     super(ctx, options);
     this.color = 'darkgreen';
     this.shield = new Shield(this.context, this.pos,'cyan',ArcType.eighth,this.size);
-    this.speed = {x: 5, y: 5};
+    this.speed = {x: 10, y: 10};
     this.controls = this.setControls();
 
   }

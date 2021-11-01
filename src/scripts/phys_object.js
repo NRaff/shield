@@ -1,3 +1,6 @@
+import ArrayUtil from "./Utils/ArrayUtil";
+import Defaults from "./Utils/Defaults";
+
 class PhysObject {
   constructor(parent, options) {
     let goodOptions = options || PhysObject.setDefaults();
@@ -11,6 +14,7 @@ class PhysObject {
       xRight: this.canvas.width - 30
     }
     this.endPos = goodOptions.endPos;
+    this.path;
   }
   static setOptions(startPos, w, h, color, endPos) {
     return {
@@ -45,6 +49,7 @@ class PhysObject {
     obj.rect(this.pos.x,this.pos.y,this.size.w, this.size.h)
     this.context.fillStyle = this.color;
     this.context.fill(obj);
+    this.path = obj;
   }
 
   static setDefaults() {
@@ -63,6 +68,21 @@ class PhysObject {
         h: 10
       }
     }
+  }
+
+  setRandomStartEnd() {
+    let start = {
+      x: Math.floor(Math.random() * this.bounds.xRight) + this.bounds.xLeft,
+      y: Math.floor(Math.random() * this.canvas.height)
+    }
+
+    let direction = ArrayUtil.sample([-1, 1])
+    let end = {
+      x: start.x + direction * ArrayUtil.sample(Defaults.wallLengths()),
+      y: start.y + direction * ArrayUtil.sample(Defaults.wallLengths())
+    }
+    this.pos = start
+    this.endPos = end
   }
 
   // checks if a given object is inbounds using both the x an dy axis as well

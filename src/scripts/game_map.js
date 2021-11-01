@@ -1,3 +1,4 @@
+import Enemy from "./enemy";
 import Tank from "./tank";
 import ArcType from "./Utils/ArcType";
 import Wall from "./wall";
@@ -10,6 +11,7 @@ class GameMap {
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = []; // need to keep track of all objects on the page
+    this.enemies = [];
     this.tank = this.setupTank();
     this.startMap();
     this.mousePos = {
@@ -23,12 +25,14 @@ class GameMap {
     this.tank.drawTank();
     this.drawPortals();
     this.redrawBarriers();
+    this.redrawEnemies();
   }
 
   startMap() {
     this.tank.drawTank();
     this.drawPortals();
     this.drawBarriers();
+    this.drawEnemies();
     // add keyboard controls listener
     this.canvas.addEventListener('keydown', (keyEvent) => {
       let keyPressed = keyEvent.key
@@ -108,6 +112,7 @@ class GameMap {
 
   redrawBarriers() {
     this.walls.forEach((wall) => {
+      this.ctx.fillStyle = wall.color;
       this.ctx.fill(wall.path);
     })
   }
@@ -118,6 +123,26 @@ class GameMap {
     const wall = new Wall(this.canvas, options);
     wall.randomWall();
     return wall;
+  }
+
+  redrawEnemies() {
+    this.enemies.forEach((enemy) => {
+      this.ctx.fillStyle = enemy.color;
+      this.ctx.fill(enemy.path);
+    })
+  }
+
+  drawEnemies() {
+    while (this.enemies.length < this.level) {
+      this.enemies.push(this.drawEnemy());
+    }
+  }
+
+  drawEnemy() {
+    let enemy = new Enemy(this.canvas);
+    enemy.setRandomStartEnd();
+    enemy.draw();
+    return enemy;
   }
 }
 

@@ -1,13 +1,11 @@
 import ArrayUtil from "./Utils/ArrayUtil";
-import Defaults from "./Utils/Defaults";
 import PhysObject from "./phys_object";
 
 class Wall extends PhysObject {
   //Provides functions to draw walls vertically, horizontally, and diagonally
   constructor(ctx, options) {
     super(ctx, options);
-    this.color = 'darkgray'
-    this.path;
+    this.color = 'darkgray';
   }
 
   drawVert() {
@@ -89,21 +87,6 @@ class Wall extends PhysObject {
     let types = [this.drawVert, this.drawHorizon, this.drawTriangle, this.drawCorner]
     let wallType = ArrayUtil.sample(types);
     wallType.apply(this)
-  }
-
-  setRandomStartEnd() {
-    let start = {
-      x: Math.floor(Math.random() * this.bounds.xRight) + this.bounds.xLeft,
-      y: Math.floor(Math.random() * this.canvas.height)
-    }
-
-    let direction = ArrayUtil.sample([-1,1])
-    let end = {
-      x: start.x + direction * ArrayUtil.sample(Defaults.wallLengths()),
-      y: start.y + direction * ArrayUtil.sample(Defaults.wallLengths())
-    }
-    this.pos = start
-    this.endPos = end
   }
 }
 
