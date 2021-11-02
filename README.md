@@ -38,15 +38,18 @@ Tech Stack
 - ✅ Connect tank to keyboard to enable movement around map
 #### Monday
 - ✅ Connect mouse action to shield angle
-- Enable collisions with map objects
+- ✅ Enable collisions with map objects
 - ✅ Add Enemies
-- Allow enemies to fire projectiles
-- Enable collisions with projectiles
+- 🔴 [Behind] Allow enemies to fire projectiles
+- 🔴 [Behind] Enable collisions with projectiles
 #### Tuesday
-- Build additional levels
+- Add game controls (play, pause, mute, unmute)
+- Add github and linkedin links
+- Create levels handling
 - Polish design and collision animations
 - Play and test
 #### Wednesday
+- add additional levels
 - Finalize design
 - Prepare demo
 #### Thursday
