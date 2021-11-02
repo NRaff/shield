@@ -15,8 +15,16 @@ const ArcType = {
     return Math.PI / 2;
   },
 
+  sixth() {
+    return Math.PI * 2 / 6;
+  },
+
   eighth() {
     return Math.PI / 2 / 2;
+  },
+
+  ninth() {
+    return Math.PI * 2 / 9
   }
 }
 

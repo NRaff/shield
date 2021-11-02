@@ -37,7 +37,11 @@ const Defaults = {
   },
 
   shieldSize() {
-    return ArcType.quarter();
+    return ArcType.eighth();
+  },
+
+  shieldRadiusAdustment() {
+    return 2;
   },
 
   wallWidth() {

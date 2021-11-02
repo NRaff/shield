@@ -28,15 +28,17 @@ class Enemy extends PhysObject {
 
   shootsFireball(gameMap) {
     // let fireball = new Fireball(this.canvas, this.pos, this.vector);
-    let fireball = new Fireball(this.canvas, this.pos, this.vector, gameMap);
+    let midEnemy = {x: this.pos.x + 5, y: this.pos.y + 5}
+    let fireball = new Fireball(this.canvas, midEnemy, this.vector, gameMap);
     fireball.setPath()
     fireball.draw();
     return fireball
   }
   
   setVector(game_map) {
-    let xVector = game_map.tank.pos.x - this.pos.x;
-    let yVector = game_map.tank.pos.y - this.pos.y;
+    let midEnemy = { x: this.pos.x + 5, y: this.pos.y + 5 }
+    let xVector = game_map.tank.pos.x - midEnemy.x;
+    let yVector = game_map.tank.pos.y - midEnemy.y;
     let yReduce = yVector / Math.abs(yVector);
     let xReduce = xVector / Math.abs(yVector);
     // let gcf = FactorUtil.gcf(xVector, yVector);

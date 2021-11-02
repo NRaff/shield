@@ -37,8 +37,9 @@ class Shield {
   newAngle(angle) {
     // set the shields arc start to half the mouse angle
     // set the sheilds arc end to the start angle + 90
+
     this.arcStart = angle + ArcType.eighth();
-    this.arcEnd = -this.arcStart + this.arcType;
+    this.arcEnd = -this.arcStart + ArcType.quarter();
   }
 
   offset(){
@@ -54,7 +55,7 @@ class Shield {
   }
 
   getRadius() {
-    return Math.sqrt(this.parentSize.w * this.parentSize.h);
+    return Math.sqrt(this.parentSize.w * this.parentSize.h) + Defaults.shieldRadiusAdustment();
   }
 
 }
