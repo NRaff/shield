@@ -60,14 +60,73 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  width: 100%;
+  height: auto;
   margin: 20px;
+  background-color: #202124;
+}
+
+.all-content {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  width: inherit;
+  height: auto;
+  justify-content: space-between;
+}
+
+.game-area {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.navigation-area {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navigation-area a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: 100px;
+  text-decoration: none;
+  font-family: Arial;
+  font-size: large;
+  font-weight: bold;
+  background-color: whitesmoke;
+  border-radius: 3px;
+  text-align: center;
+  margin-bottom: 10px;
+  height: 5%;
+}
+
+.navigation-area a:hover {
+  background-color: darkgray;
+}
+
+.navigation-area img {
+  height: 50%;
 }
 
 canvas {
   display: block;
-  width: 75%;
+  width: 95%;
   height: auto;
   border-radius: 5px;
   background-color: lightgrey;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: large;
+  font-family: Arial;
+  font-weight: bold;
+  margin: 20px;
 }

@@ -27,7 +27,6 @@ class Enemy extends PhysObject {
   }
 
   shootsFireball(gameMap) {
-    // let fireball = new Fireball(this.canvas, this.pos, this.vector);
     let midEnemy = {x: this.pos.x + 5, y: this.pos.y + 5}
     let fireball = new Fireball(this.canvas, midEnemy, this.vector, gameMap);
     fireball.setPath()
@@ -41,8 +40,6 @@ class Enemy extends PhysObject {
     let yVector = game_map.tank.pos.y - midEnemy.y;
     let yReduce = yVector / Math.abs(yVector);
     let xReduce = xVector / Math.abs(yVector);
-    // let gcf = FactorUtil.gcf(xVector, yVector);
-    // debugger
     let moveX = xReduce//xVector / Math.abs(xVector);
     let moveY = yReduce//yVector / Math.abs(yVector);
     this.vector = {
