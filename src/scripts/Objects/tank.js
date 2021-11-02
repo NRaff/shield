@@ -17,8 +17,9 @@ class Tank extends PhysObject {
     this.shield.updatePos();
     this.setPath();
     this.shield.setPath();
-    this.path.addPath(this.shield.path)
     this.draw();
+    this.shield.draw();
+
   }
 
   setControls() {

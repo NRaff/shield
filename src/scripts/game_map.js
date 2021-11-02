@@ -17,6 +17,10 @@ class GameMap {
     this.walls = [];
     this.enemies = [];
     this.portals = [];
+    this.fireballs = [];
+    this.firing = ''; // the interval that triggers all enemies to fire
+    this.moveFireballs = ''; // the interval that triggers the page refresh to keep moving bullets
+    this.gameOver = false;
     this.tank = this.setupTank();
     this.startMap();
     this.mousePos = {
@@ -31,17 +35,51 @@ class GameMap {
     this.redrawPortals();
     this.redrawBarriers();
     this.redrawEnemies();
+    this.redrawFireballs();
   }
 
   startMap() {
     this.tank.drawTank();
     this.portals = Portal.drawPortals.call(this)
     this.enemies = Enemy.drawEnemies.call(this, this.level);
-    this.enemies[0].setVector(this);
-    this.enemies[0].shootsFireball();
     this.walls = Wall.drawWalls.call(this, this.level);
+    this.beginFiring();
+    this.keepFiring();
     this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
     this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));
+  }
+
+  addFireballs() {
+    this.enemies.forEach((enemy) => {
+      let vector = enemy.setVector(this);
+      this.fireballs.push(enemy.shootsFireball(vector));
+    })
+  }
+
+  beginFiring() {
+    this.addFireballs();
+
+    this.moveFireballs = setInterval(() => {
+      this.fireballs.forEach((fireball) => {
+        
+        fireball.move();
+        this.redrawMap();
+      })
+      this.fireballs = this.fireballs.filter((fireball)=> {
+        // debugger
+        return fireball.hitWall === false;
+      })
+      if (this.gameOver && this.fireballs.length === 0) {
+        clearInterval(this.moveFireballs);
+      }
+    }, 20)
+  }
+
+  keepFiring() {
+    this.firing = setInterval(() => {
+      this.addFireballs();
+      //kill intervall on complete
+    }, 500)
   }
 
   mouseAngle() {
@@ -98,8 +136,14 @@ class GameMap {
     })
   }
 
+  redrawFireballs() {
+    this.fireballs.forEach((fireball) => {
+      fireball.draw();
+    })
+  }
+
   //determine if the tank collided with another object
-  collisionDetected() {
+  tankCollisionDetected() {
     let tankCorners = TankControlsUtil.getTankCorners.apply(this.tank);
     let allObjects = this.walls.concat(this.enemies);
     for (let obj of allObjects) {
@@ -111,6 +155,24 @@ class GameMap {
     }
     return false;
   }
+
+
+  winDetected() {
+    let tankCorners = TankControlsUtil.getTankCorners.apply(this.tank);
+    let winPortal = this.portals[1];
+    for(let corner of Object.values(tankCorners)) {
+      // debugger
+      if(this.ctx.isPointInPath(winPortal.path,corner.x, corner.y)) {
+        clearInterval(this.firing);
+        console.log('Player has won!');
+        this.gameOver = true;
+        return true;
+      }
+      return false;
+    }
+  }
+
+
 }
 
 

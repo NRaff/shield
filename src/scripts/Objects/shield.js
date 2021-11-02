@@ -29,6 +29,11 @@ class Shield {
     this.path = shield;
   }
 
+  draw() {
+    this.ctx.fillStyle = 'cyan';
+    this.ctx.fill(this.path)
+  }
+
   newAngle(angle) {
     // set the shields arc start to half the mouse angle
     // set the sheilds arc end to the start angle + 90

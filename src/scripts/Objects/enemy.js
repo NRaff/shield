@@ -1,3 +1,4 @@
+import FactorUtil from "../Utils/FactorUtil";
 import Fireball from "./fireball";
 import PhysObject from "./phys_object";
 
@@ -24,17 +25,22 @@ class Enemy extends PhysObject {
     return enemies;
   }
 
-  shootsFireball() {
-    console.log(this.pos)
-    let fireball = new Fireball(this.canvas, this.pos);
+  shootsFireball(vector) {
+    let fireball = new Fireball(this.canvas, this.pos, vector);
     fireball.setPath()
+    fireball.draw();
+    return fireball
   }
   
   setVector(game_map) {
     let xVector = game_map.tank.pos.x - this.pos.x;
     let yVector = game_map.tank.pos.y - this.pos.y;
-    let moveX = xVector / Math.abs(xVector);
-    let moveY = yVector / Math.abs(yVector);
+    let yReduce = yVector / Math.abs(yVector);
+    let xReduce = xVector / Math.abs(yVector);
+    // let gcf = FactorUtil.gcf(xVector, yVector);
+    // debugger
+    let moveX = xReduce//xVector / Math.abs(xVector);
+    let moveY = yReduce//yVector / Math.abs(yVector);
     return {
       x: moveX,
       y: moveY

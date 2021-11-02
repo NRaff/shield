@@ -40,11 +40,12 @@ Tech Stack
 - ✅ Connect mouse action to shield angle
 - ✅ Enable collisions with map objects
 - ✅ Add Enemies
-- 🔴 [Behind] Allow enemies to fire projectiles
+- ✅ Allow enemies to fire projectiles
 - 🔴 [Behind] Enable collisions with projectiles
 #### Tuesday
 - Add game controls (play, pause, mute, unmute)
 - ✅ Add cyle positioning logic if tank moves outside canvas bounds
+- 🟡 Add win logic
 - Add github and linkedin links
 - Create levels handling
 - Polish design and collision animations
