@@ -1,7 +1,9 @@
 import GameMap from "./scripts/game_map";
+import GameManager from "./scripts/Objects/GameManager";
 
 document.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("app_page");
-  const shield = document.getElementById("shield_game");
-  const gameMap = new GameMap(shield,1);
+  const gameManager = new GameManager();
+  // const shield = document.getElementById("shield_game");
+  // const gameMap = new GameMap(shield,1);
 })

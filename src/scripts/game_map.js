@@ -45,8 +45,6 @@ class GameMap {
     this.walls = Wall.drawWalls.call(this, this.level);
     this.beginFiring();
     this.keepFiring();
-    this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
-    this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));
   }
 
   addFireballs() {
