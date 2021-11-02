@@ -1,3 +1,4 @@
+import Fireball from "./fireball";
 import PhysObject from "./phys_object";
 
 class Enemy extends PhysObject {
@@ -21,6 +22,23 @@ class Enemy extends PhysObject {
       enemies.push(drawFunc())
     }
     return enemies;
+  }
+
+  shootsFireball() {
+    console.log(this.pos)
+    let fireball = new Fireball(this.canvas, this.pos);
+    fireball.setPath()
+  }
+  
+  setVector(game_map) {
+    let xVector = game_map.tank.pos.x - this.pos.x;
+    let yVector = game_map.tank.pos.y - this.pos.y;
+    let moveX = xVector / Math.abs(xVector);
+    let moveY = yVector / Math.abs(yVector);
+    return {
+      x: moveX,
+      y: moveY
+    }
   }
 }
 

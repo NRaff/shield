@@ -37,6 +37,8 @@ class GameMap {
     this.tank.drawTank();
     this.portals = Portal.drawPortals.call(this)
     this.enemies = Enemy.drawEnemies.call(this, this.level);
+    this.enemies[0].setVector(this);
+    this.enemies[0].shootsFireball();
     this.walls = Wall.drawWalls.call(this, this.level);
     this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
     this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));

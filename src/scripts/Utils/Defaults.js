@@ -36,6 +36,10 @@ const Defaults = {
 
   wallWidth() {
     return 5;
+  },
+
+  fireballSize(){
+    return 5;
   }
 }
 
