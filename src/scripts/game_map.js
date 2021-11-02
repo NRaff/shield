@@ -72,13 +72,13 @@ class GameMap {
       if (this.gameOver && this.fireballs.length === 0) {
         clearInterval(this.moveFireballs);
       }
+      this.lossDetected();
     }, 20)
   }
 
   keepFiring() {
     this.firing = setInterval(() => {
       this.addFireballs();
-      //kill intervall on complete
     }, 500)
   }
 
@@ -172,6 +172,20 @@ class GameMap {
     }
   }
 
+  lossDetected() {
+    // if center point of any fireballs is in the tank path
+    for(let fireball of this.fireballs) {
+      if (this.ctx.isPointInPath(this.tank.path, fireball.pos.x,fireball.pos.y)) {
+        clearInterval(this.firing);
+        console.log('Players tank was shot! Game over.')
+        this.tank.color = 'purple'
+        this.tank.drawTank();
+        this.gameOver = true;
+        return true
+      }
+    }
+    return false;
+  }
 
 }
 
