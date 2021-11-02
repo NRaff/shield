@@ -34,6 +34,21 @@ class Tank extends PhysObject {
     }
   }
 
+  circleBack() {
+    if (this.nextPos.x > this.canvas.width) {
+      this.nextPos.x = this.nextPos.x % this.canvas.width;
+    }
+    if (this.nextPos.y > this.canvas.height) {
+      this.nextPos.y = this.nextPos.y % this.canvas.height;
+    }
+    if (this.nextPos.x < 0) {
+      this.nextPos.x = this.canvas.width + this.nextPos.x
+    }
+    if (this.nextPos.y < 0) {
+      this.nextPos.y = this.canvas.height + this.nextPos.y
+    }
+  }
+
   
 
 }

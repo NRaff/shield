@@ -26,16 +26,19 @@ const TankControlsUtil = {
   //returns an x,y vector adjust incase of a collision
   checkUp(){
     this.nextPos.y = this.pos.y - this.speed.y;
-    
+    this.circleBack()
   },
   checkDown() {
     this.nextPos.y = this.pos.y + this.speed.y;
+    this.circleBack()
   },
   checkLeft() {
     this.nextPos.x = this.pos.x - this.speed.x;
+    this.circleBack()
   },
   checkRight() {
     this.nextPos.x = this.pos.x + this.speed.x;
+    this.circleBack()
   },
 
   move() {
