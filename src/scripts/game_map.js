@@ -5,6 +5,7 @@ import PlayerEvents from "./Utils/PlayerEvents";
 import Wall from "./Objects/wall";
 import Defaults from "./Utils/Defaults";
 import Portal from "./Objects/portal";
+import TankControlsUtil from "./Utils/TankControlsUtil";
 
 class GameMap {
   constructor(canvas, level) {
@@ -30,7 +31,6 @@ class GameMap {
     this.redrawPortals();
     this.redrawBarriers();
     this.redrawEnemies();
-    // this.detectCollision();
   }
 
   startMap() {
@@ -40,7 +40,6 @@ class GameMap {
     this.walls = Wall.drawWalls.call(this, this.level);
     this.canvas.addEventListener('keydown',PlayerEvents.moveKey.bind(this));
     this.canvas.addEventListener('mousemove', PlayerEvents.moveMouse.bind(this));
-    // this.detectCollision();
   }
 
   mouseAngle() {
@@ -97,24 +96,18 @@ class GameMap {
     })
   }
 
-  detectCollision() {
-    let tankCorners = {
-      tl: {x: this.tank.pos.x, y: this.tank.pos.y},
-      tr: {x: this.tank.pos.x + Defaults.tankSize().w, y: this.tank.pos.y},
-      bl: {x: this.tank.pos.x, y: this.tank.pos.y + Defaults.tankSize().h},
-      br: {x: this.tank.pos.x + Defaults.tankSize().w, y: this.tank.pos.y + Defaults.tankSize().h}
-    }
-
-    let allObjects = this.portals.concat(this.walls, this.enemies)
+  //determine if the tank collided with another object
+  collisionDetected() {
+    let tankCorners = TankControlsUtil.getTankCorners.apply(this.tank);
+    let allObjects = this.walls.concat(this.enemies);
     for (let obj of allObjects) {
-      Object.keys(tankCorners).some((key) => {
+      let collisions = Object.keys(tankCorners).filter((key) => {
         let corner = tankCorners[key]
-        if (this.ctx.isPointInPath(obj.path, corner.x, corner.y)) {
-          console.log(`There was a collision with between corner: ${key} and a ${obj.constructor.name}`);
-        }
+        return this.ctx.isPointInPath(obj.path, corner.x, corner.y)
       })
-      
+      if (collisions.length !== 0) return true;
     }
+    return false;
   }
 }
 

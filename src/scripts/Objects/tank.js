@@ -8,9 +8,9 @@ class Tank extends PhysObject {
     super(ctx, options);
     this.color = 'darkgreen';
     this.shield = new Shield(this.context, this.pos,'cyan',ArcType.eighth,this.size);
-    this.speed = {x: 10, y: 10};
+    this.speed = {x: 5, y: 5};
     this.controls = this.setControls();
-
+    this.nextPos = {...this.pos};
   }
 
   drawTank() {
@@ -27,12 +27,14 @@ class Tank extends PhysObject {
       'a': TankControlsUtil.moveLeft.bind(this),
       's': TankControlsUtil.moveDown.bind(this),
       'd': TankControlsUtil.moveRight.bind(this),
-      'ArrowUp': TankControlsUtil.moveUp.bind(this),
-      'ArrowLeft': TankControlsUtil.moveLeft.bind(this),
-      'ArrowDown': TankControlsUtil.moveDown.bind(this),
-      'ArrowRight': TankControlsUtil.moveRight.bind(this)
+      'ArrowUp': TankControlsUtil.checkUp.bind(this),
+      'ArrowLeft': TankControlsUtil.checkLeft.bind(this),
+      'ArrowDown': TankControlsUtil.checkDown.bind(this),
+      'ArrowRight': TankControlsUtil.checkRight.bind(this)
     }
   }
+
+  
 
 }
 
