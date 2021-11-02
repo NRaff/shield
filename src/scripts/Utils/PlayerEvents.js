@@ -6,7 +6,6 @@ const PlayerEvents = {
     let keyPressed = keyEvent.key
     if (Object.keys(this.tank.controls).includes(keyPressed)) {
       this.tank.controls[keyPressed]()
-      console.log(this.collisionDetected())
       if (!this.collisionDetected()) {
         TankControlsUtil.move.apply(this.tank);
         this.tank.shield.newAngle(this.mouseAngle());
@@ -22,8 +21,6 @@ const PlayerEvents = {
     this.tank.shield.newAngle(this.mouseAngle());
     window.requestAnimationFrame(this.redrawMap.bind(this));
   }
-
-
 }
 
 export default PlayerEvents;
