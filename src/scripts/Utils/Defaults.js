@@ -1,3 +1,5 @@
+import ArcType from "./ArcType";
+
 const Defaults = {
   wallLengths () {
     return [10, 20, 30, 40];
@@ -32,6 +34,10 @@ const Defaults = {
 
   shieldOffset() {
     return 5;
+  },
+
+  shieldSize() {
+    return ArcType.quarter();
   },
 
   wallWidth() {

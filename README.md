@@ -41,7 +41,7 @@ Tech Stack
 - ✅ Enable collisions with map objects
 - ✅ Add Enemies
 - ✅ Allow enemies to fire projectiles
-- 🔴 [Behind] Enable collisions with projectiles
+- ✅ Enable collisions with projectiles
 #### Tuesday
 - Add game controls (play, pause, mute, unmute)
 - ✅ Add cyle positioning logic if tank moves outside canvas bounds

@@ -7,8 +7,8 @@ class Shield {
     this.parentPos = parentPos;
     this.pos = this.offset();
     this.color = color
-    this.arcType = arcType() || ArcType.eighth();
-    this.arcStart = arcType() || ArcType.eighth();
+    this.arcType = arcType || Defaults.shieldSize();
+    this.arcStart = arcType || Defaults.shieldSize();
     this.arcEnd = this.arcStart;
     this.parentSize = parentSize;
     this.path;
@@ -38,7 +38,7 @@ class Shield {
     // set the shields arc start to half the mouse angle
     // set the sheilds arc end to the start angle + 90
     this.arcStart = angle + ArcType.eighth();
-    this.arcEnd = -this.arcStart + ArcType.quarter();
+    this.arcEnd = -this.arcStart + this.arcType;
   }
 
   offset(){

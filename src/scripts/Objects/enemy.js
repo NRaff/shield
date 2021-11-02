@@ -6,9 +6,10 @@ class Enemy extends PhysObject {
   constructor(ctx, options) {
     super(ctx, options)
     this.color = 'red'
+    this.vector = {};
   }
 
-  static drawEnemy() {
+  static drawEnemy(gamemap) {
     let enemy = new Enemy(this.canvas);
     enemy.setRandomStartEnd();
     enemy.setPath();
@@ -25,8 +26,9 @@ class Enemy extends PhysObject {
     return enemies;
   }
 
-  shootsFireball(vector) {
-    let fireball = new Fireball(this.canvas, this.pos, vector);
+  shootsFireball(gameMap) {
+    // let fireball = new Fireball(this.canvas, this.pos, this.vector);
+    let fireball = new Fireball(this.canvas, this.pos, this.vector, gameMap);
     fireball.setPath()
     fireball.draw();
     return fireball
@@ -41,6 +43,10 @@ class Enemy extends PhysObject {
     // debugger
     let moveX = xReduce//xVector / Math.abs(xVector);
     let moveY = yReduce//yVector / Math.abs(yVector);
+    this.vector = {
+      x: moveX,
+      y: moveY
+    }
     return {
       x: moveX,
       y: moveY

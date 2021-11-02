@@ -52,7 +52,7 @@ class GameMap {
   addFireballs() {
     this.enemies.forEach((enemy) => {
       let vector = enemy.setVector(this);
-      this.fireballs.push(enemy.shootsFireball(vector));
+      this.fireballs.push(enemy.shootsFireball(this));
     })
   }
 
@@ -61,18 +61,15 @@ class GameMap {
 
     this.moveFireballs = setInterval(() => {
       this.fireballs.forEach((fireball) => {
-        
         fireball.move();
         this.redrawMap();
       })
       this.fireballs = this.fireballs.filter((fireball)=> {
-        // debugger
         return fireball.hitWall === false;
       })
       if (this.gameOver && this.fireballs.length === 0) {
         clearInterval(this.moveFireballs);
       }
-      this.lossDetected();
     }, 20)
   }
 
@@ -171,22 +168,6 @@ class GameMap {
       return false;
     }
   }
-
-  lossDetected() {
-    // if center point of any fireballs is in the tank path
-    for(let fireball of this.fireballs) {
-      if (this.ctx.isPointInPath(this.tank.path, fireball.pos.x,fireball.pos.y)) {
-        clearInterval(this.firing);
-        console.log('Players tank was shot! Game over.')
-        this.tank.color = 'purple'
-        this.tank.drawTank();
-        this.gameOver = true;
-        return true
-      }
-    }
-    return false;
-  }
-
 }
 
 
