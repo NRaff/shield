@@ -9,7 +9,8 @@ import TankControlsUtil from "./Utils/TankControlsUtil";
 import GameManager from "./Objects/GameManager";
 
 class GameMap {
-  constructor(canvas, level) {
+  constructor(manager,canvas, level) {
+    this.manager = manager;
     this.canvas = canvas
     this.height = this.canvas.height;
     this.width = this.canvas.width;

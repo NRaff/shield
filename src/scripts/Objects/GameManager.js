@@ -28,10 +28,9 @@ class GameManager {
         return fireball.hitWall === false;
       })
       if (this.gameMap.gameOver && this.gameMap.win === false) {
-        this.showGameOverDialogue('loss');
-      }
-      if (this.gameMap.gameOver && this.gameMap.fireballs.length === 0) {
         clearInterval(this.gameMap.moveFireballs);
+        this.showGameOverDialogue('loss');
+        
       }
     }, 20)
   }
@@ -67,7 +66,7 @@ class GameManager {
       this.beginFiring();
       this.keepFiring();
     } else {
-      this.endGame(e);
+      this.resetGame(e);
     } 
   }
 
@@ -75,22 +74,32 @@ class GameManager {
     this.dynamicCanvasCreation();
     this.gameCanvas = document.getElementById('shield_game');
     e.target.innerText = 'Stop';
-    this.gameMap = new GameMap(this.gameCanvas, 2);
+    this.gameMap = new GameMap(this, this.gameCanvas, 2);
     this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
     this.addInstructionsPop();
     this.hideNewGameDialogue();
   }
 
-  endGame(e) {
+  resetGame(e) {
     e.target.innerText = 'Start';
     clearInterval(this.gameMap.moveFireballs);
     clearInterval(this.gameMap.firing)
     this.removeInGameListeners(this.gameMap);
     this.dynamicRemoveCanvas();
     this.hideInstructionsPop();
+    this.hideGameOverDialogue();
     this.showNewGameDialogue();
     this.gameCanvas.getContext('2d').clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
+  }
+
+  endGame(winLoss) {
+    clearInterval(this.gameMap.moveFireballs);
+    clearInterval(this.gameMap.firing)
+    this.removeInGameListeners(this.gameMap);
+    // this.dynamicRemoveCanvas();
+    // this.hideInstructionsPop();
+    this.showGameOverDialogue(winLoss);
   }
 
   instMouseEnter() {
@@ -124,6 +133,11 @@ class GameManager {
     this.pageCols.appendChild(dialogue);
   }
 
+  hideGameOverDialogue() {
+    let dialogue = document.getElementsByClassName('game-over')[0];
+    this.pageCols.removeChild(dialogue);
+  }
+
   dynamicCreateGameOverDialogue(winOrLoss) {
     let gameOverDiv = document.createElement('div');
     gameOverDiv.classList.add('game-over')
@@ -133,6 +147,7 @@ class GameManager {
     message.innerText = WinLossMessage[winOrLoss].message;
     gameOverDiv.appendChild(header);
     gameOverDiv.appendChild(message);
+    return gameOverDiv;
   }
 
   addInstructionsListener() {
@@ -157,6 +172,9 @@ class GameManager {
   createInstructions(){
     let subDiv = document.createElement('div');
     subDiv.id = 'instructions-display';
+    let header = document.createElement('h1');
+    header.innerText = "Tap 'Start' to begin!"
+    subDiv.appendChild(header);
     let subUl = document.createElement('ul');
     let controlsMove = document.createElement('li');
     controlsMove.innerText = 'Use WASD or Arrow Keys to move';

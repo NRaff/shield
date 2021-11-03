@@ -39,10 +39,11 @@ class Enemy extends PhysObject {
     let midEnemy = { x: this.pos.x + 5, y: this.pos.y + 5 }
     let xVector = game_map.tank.pos.x - midEnemy.x;
     let yVector = game_map.tank.pos.y - midEnemy.y;
-    let yReduce = yVector / Math.abs(yVector);
-    let xReduce = xVector / Math.abs(yVector);
-    let moveX = xReduce//xVector / Math.abs(xVector);
-    let moveY = yReduce//yVector / Math.abs(yVector);
+    let maxVector = Math.max(Math.abs(xVector, yVector));
+    let yReduce = yVector / maxVector
+    let xReduce = xVector / maxVector
+    let moveX = xReduce
+    let moveY = yReduce
     this.vector = {
       x: moveX,
       y: moveY

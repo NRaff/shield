@@ -15,7 +15,12 @@ const PlayerEvents = {
       
     }
     window.requestAnimationFrame(this.redrawMap.bind(this));
-    this.winDetected();
+    if (!this.win) {
+      this.winDetected();
+    }
+    if (this.gameOver && this.win) {
+      this.manager.endGame('win');
+    }
   },
 
   moveMouse(e) {
