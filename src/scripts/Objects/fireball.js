@@ -28,7 +28,6 @@ class Fireball {
     fireball.closePath();
     this.path = fireball;
     this.ctx.fillStyle = this.color;
-    // this.ctx.fill(fireball)
   }
 
   draw() {
@@ -56,7 +55,6 @@ class Fireball {
       clearInterval(this.gameMap.firing)
       this.gameMap.tank.color = 'purple';
       this.gameMap.gameOver = true;
-      console.log(`Fireball collided with the Tank.`)
     }
   }
 
@@ -64,7 +62,6 @@ class Fireball {
     let shield = this.gameMap.tank.shield;
     if (this.ctx.isPointInPath(shield.path, this.pos.x, this.pos.y)) {
       this.collisionOccured()
-      console.log(`Fireball collided with the shield.`)
     }
   }
 
@@ -72,7 +69,6 @@ class Fireball {
     for (let portal of this.gameMap.portals) {
       if (this.ctx.isPointInPath(portal.path, this.pos.x, this.pos.y)) {
         this.collisionOccured()
-        console.log(`Fireball collided with a portal.`)
       }
     }
   }
@@ -81,7 +77,6 @@ class Fireball {
     for (let wall of this.gameMap.walls) {
       if (this.ctx.isPointInPath(wall.path, this.pos.x, this.pos.y)) {
         this.collisionOccured()
-        console.log(`Fireball collided with a wall.`)
       }
     }
   }

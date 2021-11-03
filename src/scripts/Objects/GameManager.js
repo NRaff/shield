@@ -4,7 +4,7 @@ import PlayerEvents from "../Utils/PlayerEvents";
 class GameManager {
   constructor() {
     this.pageCols = document.getElementById('all-content');
-    this.gameCanvas = document.getElementById('shield_game');
+    this.gameCanvas; //= document.getElementById('shield_game');
     this.navigationArea = document.getElementById('navigation-area')
     this.startBtn = document.getElementById('start');
     this.instBtn = document.getElementById('instructions');
@@ -28,30 +28,31 @@ class GameManager {
     this.gameCanvas.addEventListener('mousemove', this.playerMovesMouseFn);
   }
 
-  removeInGameListeners(gameMap) {
+  removeInGameListeners() {
     this.gameCanvas.removeEventListener('keydown', this.playerMovesKeyFn);
     this.gameCanvas.removeEventListener('mousemove', this.playerMovesMouseFn);
   }
 
   startClicked(e) {
     if (e.target.innerText === 'Start') {
+      this.dynamicCanvasCreation();
+      this.gameCanvas = document.getElementById('shield_game');
       e.target.innerText = 'Stop';
-      const gameMap = new GameMap(this.gameCanvas, 1);
-      this.gameMap = gameMap;
-      this.setInGameListeners(gameMap)
+      this.gameMap = new GameMap(this.gameCanvas, 2);
+      this.setInGameListeners(this.gameMap)
       this.gameCanvas.focus();
+      
     } else {
       e.target.innerText = 'Start';
       clearInterval(this.gameMap.moveFireballs);
       clearInterval(this.gameMap.firing)
       this.removeInGameListeners(this.gameMap);
+      this.dynamicRemoveCanvas();
       this.gameCanvas.getContext('2d').clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
     } 
   }
 
   instMouseEnter() {
-    console.log('mouseEntered');
-    console.log(this.createInstructions())
     this.navigationArea.appendChild(this.instructions);
   }
 
@@ -77,12 +78,19 @@ class GameManager {
   }
 
   dynamicCanvasCreation() {
-    // let game_area = document.createElement('div');
-    // game_area.id = 'game-area';
-    // this.gameCanvas = document.createElement('canvas');
-    // this.gameCanvas.id = 'shield_game';
-    // game_area.appendChild(this.gameCanvas);
-    // this.pageCols.appendChild(game_area);
+    let game_area = document.createElement('div');
+    game_area.id = 'game-area';
+    this.gameCanvas = document.createElement('canvas');
+    this.gameCanvas.tabIndex = 1;
+    this.gameCanvas.focus();
+    this.gameCanvas.id = 'shield_game';
+    game_area.appendChild(this.gameCanvas);
+    this.pageCols.appendChild(game_area);
+  }
+
+  dynamicRemoveCanvas() {
+    let testGame = document.getElementById('game-area');
+    this.pageCols.removeChild(testGame);
   }
 }
 
