@@ -7,6 +7,7 @@ class Enemy extends PhysObject {
     super(ctx, options)
     this.color = 'red'
     this.vector = {};
+    this.broken = false;
   }
 
   static drawEnemy(gamemap) {

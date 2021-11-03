@@ -6,6 +6,7 @@ import Wall from "./Objects/wall";
 import Defaults from "./Utils/Defaults";
 import Portal from "./Objects/portal";
 import TankControlsUtil from "./Utils/TankControlsUtil";
+import GameManager from "./Objects/GameManager";
 
 class GameMap {
   constructor(canvas, level) {
@@ -49,8 +50,10 @@ class GameMap {
 
   addFireballs() {
     this.enemies.forEach((enemy) => {
-      let vector = enemy.setVector(this);
-      this.fireballs.push(enemy.shootsFireball(this));
+      if (!enemy.broken){
+        let vector = enemy.setVector(this);
+        this.fireballs.push(enemy.shootsFireball(this));
+      }
     })
   }
 
@@ -156,7 +159,6 @@ class GameMap {
     let tankCorners = TankControlsUtil.getTankCorners.apply(this.tank);
     let winPortal = this.portals[1];
     for(let corner of Object.values(tankCorners)) {
-      // debugger
       if(this.ctx.isPointInPath(winPortal.path,corner.x, corner.y)) {
         clearInterval(this.firing);
         console.log('Player has won!');

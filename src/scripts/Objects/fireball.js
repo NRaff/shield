@@ -11,6 +11,7 @@ class Fireball {
     this.vector = vector;
     this.speed = 5;
     this.hitWall = false;
+    this.didRicochetShield = false;
     this.gameMap = gameMap
     
   }
@@ -27,10 +28,10 @@ class Fireball {
     );
     fireball.closePath();
     this.path = fireball;
-    this.ctx.fillStyle = this.color;
   }
 
   draw() {
+    this.ctx.fillStyle = this.color;
     this.ctx.fill(this.path);
   }
 
@@ -47,6 +48,7 @@ class Fireball {
     this.manageShieldCollision();
     this.manageTankCollision();
     this.manageWallCollision();
+    this.manageEnemyCollision();
   }
 
   manageTankCollision() {
@@ -61,7 +63,23 @@ class Fireball {
   manageShieldCollision() {
     let shield = this.gameMap.tank.shield;
     if (this.ctx.isPointInPath(shield.path, this.pos.x, this.pos.y)) {
-      this.collisionOccured()
+      // this.collisionOccured()
+      this.color = 'blue';
+      this.didRicochetShield = true;
+      this.vector.x = this.vector.x * -1;
+      this.vector.y = this.vector.y * -1;
+    }
+  }
+
+  manageEnemyCollision() {
+    for (let enemy of this.gameMap.enemies) {
+      if (this.ctx.isPointInPath(enemy.path, this.pos.x, this.pos.y)) {
+        if (this.didRicochetShield) {
+          enemy.broken = true;
+          enemy.color = 'purple';
+          this.collisionOccured();
+        }
+      }
     }
   }
 
