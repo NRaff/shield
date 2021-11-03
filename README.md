@@ -47,9 +47,9 @@ Tech Stack
 - ✅ Add cyle positioning logic if tank moves outside canvas bounds
 - ✅ Add win logic
 - ✅ Add github and linkedin links
-- Add win/loss display
+- 🟡 Add win/loss display
 - Create levels handling
-- Polish design and collision animations
+- 🟡 Polish design and collision animations
 - Play and test
 #### Wednesday
 - add additional levels

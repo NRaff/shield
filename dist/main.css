@@ -66,7 +66,7 @@ body {
   background-color: #202124;
 }
 
-.all-content {
+#all-content {
   display: flex;
   flex-direction: row;
   align-items: top;
@@ -75,13 +75,28 @@ body {
   justify-content: space-between;
 }
 
-.game-area {
+#game-area {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.navigation-area {
+#instructions-display {
+  display: block;
+  background-color: whitesmoke;
+  width: 100%;
+  height: auto;
+  font-family: Arial;
+  border-radius: 3px;
+}
+
+#instructions-display ul {
+  padding: 20px;
+  list-style: circle;
+  list-style-type: disc;
+}
+
+#navigation-area {
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -90,7 +105,7 @@ body {
   margin-right: 20px;
 }
 
-.navigation-area a {
+#navigation-area a {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,11 +122,11 @@ body {
   height: 5%;
 }
 
-.navigation-area a:hover {
+#navigation-area a:hover {
   background-color: darkgray;
 }
 
-.navigation-area img {
+#navigation-area img {
   height: 50%;
 }
 
