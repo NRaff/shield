@@ -5,6 +5,7 @@ import PhysObject from "./phys_object";
 class Wall extends PhysObject {
   //Provides functions to draw walls vertically, horizontally, and diagonally
   constructor(ctx, options) {
+    // ctx is actually the canvas
     super(ctx, options);
     this.color = 'darkgray';
   }
@@ -20,7 +21,7 @@ class Wall extends PhysObject {
     vertical.closePath();
     this.path = vertical;
     ctx.fillStyle = this.color;
-    ctx.fill(vertical);
+    // ctx.fill(vertical);
   }
 
   drawHorizon() {
@@ -34,7 +35,7 @@ class Wall extends PhysObject {
     horizontal.closePath();
     this.path = horizontal;
     ctx.fillStyle = this.color;
-    ctx.fill(horizontal)
+    // ctx.fill(horizontal)
   }
 
   //Draws a diagonal wall
@@ -49,7 +50,6 @@ class Wall extends PhysObject {
     diagonal.lineTo(this.endPos.x + offset * -1, this.endPos.y);
     diagonal.closePath();
     ctx.fillStyle = this.color;
-    ctx.fill(diagonal);
   }
 
   drawTriangle() {
@@ -62,15 +62,14 @@ class Wall extends PhysObject {
     triangle.closePath();
     this.path = triangle;
     ctx.fillStyle = this.color;
-    ctx.fill(triangle);
   }
 
-  drawCorner() {
+  drawCorner(dir) {
     // -1 is a corner facing left
     // 1 is a corner facing right
-    let direction = ArrayUtil.sample([-1, 1])
-    let ctx = this.context
-    let corner = new Path2D()
+    let direction = dir || ArrayUtil.sample([-1, 1]);
+    let ctx = this.context;
+    let corner = new Path2D();
     ctx.beginPath();
     corner.moveTo(this.pos.x, this.pos.y);
     corner.lineTo(this.endPos.x, this.pos.y);
@@ -81,8 +80,6 @@ class Wall extends PhysObject {
     corner.closePath();
     this.path = corner;
     ctx.fillStyle = this.color;
-    ctx.fill(corner)
-    // return this;
   }
 
   static randomWall() {

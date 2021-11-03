@@ -43,11 +43,11 @@ Tech Stack
 - ✅ Allow enemies to fire projectiles
 - ✅ Enable collisions with projectiles
 #### Tuesday
-- 🟡 Add game controls (play, pause, ~~mute, unmute~~)
+- ✅ Add game controls (play, pause, ~~mute, unmute~~)
 - ✅ Add cyle positioning logic if tank moves outside canvas bounds
 - ✅ Add win logic
 - ✅ Add github and linkedin links
-- 🟡 Add win/loss display
+- ✅ Add win/loss display
 - Create levels handling
 - 🟡 Polish design and collision animations
 - Play and test

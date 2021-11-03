@@ -16,8 +16,8 @@ class GameMap {
     this.width = this.canvas.width;
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
-    this.walls = [];
-    this.enemies = [];
+    this.walls = level.walls;
+    this.enemies = level.enemies;
     this.portals = [];
     this.fireballs = [];
     this.firing = ''; // the interval that triggers all enemies to fire
@@ -44,8 +44,10 @@ class GameMap {
   startMap() {
     this.tank.drawTank();
     this.portals = Portal.drawPortals.call(this)
-    this.enemies = Enemy.drawEnemies.call(this, this.level);
-    this.walls = Wall.drawWalls.call(this, this.level);
+    this.redrawEnemies();
+    this.redrawBarriers();
+    // this.enemies = Enemy.drawEnemies.call(this, this.level);
+    // this.walls = Wall.drawWalls.call(this, this.level);
   }
 
   addFireballs() {

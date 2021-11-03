@@ -1,11 +1,12 @@
 import GameMap from "../game_map";
+import LevelsUtil from "../Utils/LevelsUtil";
 import PlayerEvents from "../Utils/PlayerEvents";
 import WinLossMessage from "../Utils/WinLossMessage";
 
 class GameManager {
   constructor() {
     this.pageCols = document.getElementById('all-content');
-    this.gameCanvas; //= document.getElementById('shield_game');
+    this.gameCanvas; //set on game start button
     this.navigationArea = document.getElementById('navigation-area')
     this.startBtn = document.getElementById('start');
     this.instBtn = document.getElementById('instructions');
@@ -74,7 +75,7 @@ class GameManager {
     this.dynamicCanvasCreation();
     this.gameCanvas = document.getElementById('shield_game');
     e.target.innerText = 'Stop';
-    this.gameMap = new GameMap(this, this.gameCanvas, 2);
+    this.gameMap = new GameMap(this, this.gameCanvas, LevelsUtil.levelOne.apply(this));
     this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
     this.addInstructionsPop();
