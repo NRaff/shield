@@ -14,13 +14,37 @@ class GameManager {
     this.playerMovesKeyFn;
     this.playerMovesMouseFn;
     this.instructions = this.instructions || this.createInstructions();
-    // console.log(this.instructions)
+  }
+  //! Game play management timers
+  beginFiring() {
+    this.gameMap.addFireballs();
+
+    this.gameMap.moveFireballs = setInterval(() => {
+      this.gameMap.fireballs.forEach((fireball) => {
+        fireball.move();
+        this.gameMap.redrawMap();
+      })
+      this.gameMap.fireballs = this.gameMap.fireballs.filter((fireball) => {
+        return fireball.hitWall === false;
+      })
+      if (this.gameMap.gameOver && this.gameMap.win === false) {
+        this.showGameOverDialogue('loss');
+      }
+      if (this.gameMap.gameOver && this.gameMap.fireballs.length === 0) {
+        clearInterval(this.gameMap.moveFireballs);
+      }
+    }, 20)
   }
 
+  keepFiring() {
+    this.gameMap.firing = setInterval(() => {
+      this.gameMap.addFireballs();
+    }, 500)
+  }
+
+  //! Game Operations setup
   setGameOpListeners() {
     this.startBtn.addEventListener('click', this.startClicked.bind(this));
-    // this.instBtn.addEventListener('mouseenter', this.instMouseEnter.bind(this));
-    // this.instBtn.addEventListener('mouseleave', this.instMouseLeave.bind(this));
   }
 
   setInGameListeners(gameMap) {
@@ -35,9 +59,13 @@ class GameManager {
     this.gameCanvas.removeEventListener('mousemove', this.playerMovesMouseFn);
   }
 
+  //! Callbacks
+
   startClicked(e) {
     if (e.target.innerText === 'Start') {
       this.startGame(e)
+      this.beginFiring();
+      this.keepFiring();
     } else {
       this.endGame(e);
     } 
@@ -73,6 +101,8 @@ class GameManager {
     this.navigationArea.removeChild(this.navigationArea.lastChild);
   }
 
+  // ! View Presentation
+
   hideNewGameDialogue() {
     let newGame = document.getElementsByClassName('new-game')[0];
     this.pageCols.removeChild(newGame)
@@ -90,16 +120,17 @@ class GameManager {
   }
 
   showGameOverDialogue(winOrLoss) {
-    this.dynamicCreateGameOverDialogue(winOrLoss);
+    let dialogue = this.dynamicCreateGameOverDialogue(winOrLoss);
+    this.pageCols.appendChild(dialogue);
   }
 
   dynamicCreateGameOverDialogue(winOrLoss) {
     let gameOverDiv = document.createElement('div');
     gameOverDiv.classList.add('game-over')
     let header = document.createElement('h1');
-    header.innerText = WinLossMessage[type].header;
+    header.innerText = WinLossMessage[winOrLoss].header;
     let message = document.createElement('h3');
-    message.innerText = WinLossMessage[type].message;
+    message.innerText = WinLossMessage[winOrLoss].message;
     gameOverDiv.appendChild(header);
     gameOverDiv.appendChild(message);
   }

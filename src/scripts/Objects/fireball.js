@@ -57,6 +57,7 @@ class Fireball {
       clearInterval(this.gameMap.firing)
       this.gameMap.tank.color = 'purple';
       this.gameMap.gameOver = true;
+      this.gameMap.win = false;
     }
   }
 

@@ -22,6 +22,7 @@ class GameMap {
     this.firing = ''; // the interval that triggers all enemies to fire
     this.moveFireballs = ''; // the interval that triggers the page refresh to keep moving bullets
     this.gameOver = false;
+    this.win = false;
     this.tank = this.setupTank();
     this.startMap();
     this.mousePos = {
@@ -44,8 +45,6 @@ class GameMap {
     this.portals = Portal.drawPortals.call(this)
     this.enemies = Enemy.drawEnemies.call(this, this.level);
     this.walls = Wall.drawWalls.call(this, this.level);
-    this.beginFiring();
-    this.keepFiring();
   }
 
   addFireballs() {
@@ -55,29 +54,6 @@ class GameMap {
         this.fireballs.push(enemy.shootsFireball(this));
       }
     })
-  }
-
-  beginFiring() {
-    this.addFireballs();
-
-    this.moveFireballs = setInterval(() => {
-      this.fireballs.forEach((fireball) => {
-        fireball.move();
-        this.redrawMap();
-      })
-      this.fireballs = this.fireballs.filter((fireball)=> {
-        return fireball.hitWall === false;
-      })
-      if (this.gameOver && this.fireballs.length === 0) {
-        clearInterval(this.moveFireballs);
-      }
-    }, 20)
-  }
-
-  keepFiring() {
-    this.firing = setInterval(() => {
-      this.addFireballs();
-    }, 500)
   }
 
   mouseAngle() {
@@ -163,6 +139,7 @@ class GameMap {
         clearInterval(this.firing);
         console.log('Player has won!');
         this.gameOver = true;
+        this.win = true;
         return true;
       }
       return false;
