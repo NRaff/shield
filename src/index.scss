@@ -7,9 +7,26 @@ body {
   justify-content: center;
   width: 100%;
   height: auto;
-  margin: 20px;
+  // margin: 20px;
   background-color: #202124;
   // padding: 20px;
+}
+
+.new-game {
+  display: flex;
+  flex-direction: column;
+  color: #202124;
+  background-color: whitesmoke;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 200px;
+  border-radius: 3px;
+  margin-right: 20px;
+}
+
+.new-game h1 {
+  color: #202124;
 }
 
 #all-content {
@@ -28,11 +45,12 @@ body {
 }
 
 #instructions-display {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: whitesmoke;
   width: 100%;
   height: auto;
-  // margin-top: 10;
   font-family: Arial;
   border-radius: 3px;
 }

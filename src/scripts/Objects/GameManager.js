@@ -1,5 +1,6 @@
 import GameMap from "../game_map";
 import PlayerEvents from "../Utils/PlayerEvents";
+import WinLossMessage from "../Utils/WinLossMessage";
 
 class GameManager {
   constructor() {
@@ -13,12 +14,13 @@ class GameManager {
     this.playerMovesKeyFn;
     this.playerMovesMouseFn;
     this.instructions = this.instructions || this.createInstructions();
+    // console.log(this.instructions)
   }
 
   setGameOpListeners() {
     this.startBtn.addEventListener('click', this.startClicked.bind(this));
-    this.instBtn.addEventListener('mouseenter', this.instMouseEnter.bind(this));
-    this.instBtn.addEventListener('mouseleave', this.instMouseLeave.bind(this));
+    // this.instBtn.addEventListener('mouseenter', this.instMouseEnter.bind(this));
+    // this.instBtn.addEventListener('mouseleave', this.instMouseLeave.bind(this));
   }
 
   setInGameListeners(gameMap) {
@@ -35,21 +37,32 @@ class GameManager {
 
   startClicked(e) {
     if (e.target.innerText === 'Start') {
-      this.dynamicCanvasCreation();
-      this.gameCanvas = document.getElementById('shield_game');
-      e.target.innerText = 'Stop';
-      this.gameMap = new GameMap(this.gameCanvas, 2);
-      this.setInGameListeners(this.gameMap)
-      this.gameCanvas.focus();
-      
+      this.startGame(e)
     } else {
-      e.target.innerText = 'Start';
-      clearInterval(this.gameMap.moveFireballs);
-      clearInterval(this.gameMap.firing)
-      this.removeInGameListeners(this.gameMap);
-      this.dynamicRemoveCanvas();
-      this.gameCanvas.getContext('2d').clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
+      this.endGame(e);
     } 
+  }
+
+  startGame(e) {
+    this.dynamicCanvasCreation();
+    this.gameCanvas = document.getElementById('shield_game');
+    e.target.innerText = 'Stop';
+    this.gameMap = new GameMap(this.gameCanvas, 2);
+    this.setInGameListeners(this.gameMap)
+    this.gameCanvas.focus();
+    this.addInstructionsPop();
+    this.hideNewGameDialogue();
+  }
+
+  endGame(e) {
+    e.target.innerText = 'Start';
+    clearInterval(this.gameMap.moveFireballs);
+    clearInterval(this.gameMap.firing)
+    this.removeInGameListeners(this.gameMap);
+    this.dynamicRemoveCanvas();
+    this.hideInstructionsPop();
+    this.showNewGameDialogue();
+    this.gameCanvas.getContext('2d').clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
   }
 
   instMouseEnter() {
@@ -58,6 +71,56 @@ class GameManager {
 
   instMouseLeave(){
     this.navigationArea.removeChild(this.navigationArea.lastChild);
+  }
+
+  hideNewGameDialogue() {
+    let newGame = document.getElementsByClassName('new-game')[0];
+    this.pageCols.removeChild(newGame)
+  }
+
+  showNewGameDialogue() {
+    this.pageCols.appendChild(this.createNewGameDialogue());
+  }
+
+  createNewGameDialogue() {
+    let newGame = document.createElement('div');
+    newGame.classList.add('new-game');
+    newGame.appendChild(this.instructions);
+    return newGame;
+  }
+
+  showGameOverDialogue(winOrLoss) {
+    this.dynamicCreateGameOverDialogue(winOrLoss);
+  }
+
+  dynamicCreateGameOverDialogue(winOrLoss) {
+    let gameOverDiv = document.createElement('div');
+    gameOverDiv.classList.add('game-over')
+    let header = document.createElement('h1');
+    header.innerText = WinLossMessage[type].header;
+    let message = document.createElement('h3');
+    message.innerText = WinLossMessage[type].message;
+    gameOverDiv.appendChild(header);
+    gameOverDiv.appendChild(message);
+  }
+
+  addInstructionsListener() {
+    this.instBtn.addEventListener('mouseenter', this.instMouseEnter.bind(this));
+    this.instBtn.addEventListener('mouseleave', this.instMouseLeave.bind(this));
+  }
+
+  hideInstructionsPop() {
+    let instructions = document.getElementById('instructions');
+    this.navigationArea.removeChild(instructions);
+  }
+
+  addInstructionsPop() {
+    let instructions = document.createElement('a')
+    instructions.id = 'instructions';
+    instructions.innerText = 'Instructions';
+    this.navigationArea.appendChild(instructions);
+    this.instBtn = instructions;
+    this.addInstructionsListener();
   }
 
   createInstructions(){
