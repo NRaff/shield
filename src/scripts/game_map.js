@@ -1,12 +1,7 @@
-import Enemy from "./Objects/enemy";
 import Tank from "./Objects/tank";
-import ArcType from "./Utils/ArcType";
-import PlayerEvents from "./Utils/PlayerEvents";
-import Wall from "./Objects/wall";
 import Defaults from "./Utils/Defaults";
 import Portal from "./Objects/portal";
 import TankControlsUtil from "./Utils/TankControlsUtil";
-import GameManager from "./Objects/GameManager";
 
 class GameMap {
   constructor(manager,canvas, level) {
@@ -131,6 +126,11 @@ class GameMap {
       if (collisions.length !== 0) return true;
     }
     return false;
+  }
+
+  stopIntervals() {
+    clearInterval(this.moveFireballs);
+    clearInterval(this.firing);
   }
 
 

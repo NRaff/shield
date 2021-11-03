@@ -18,8 +18,14 @@ const PlayerEvents = {
     if (!this.win) {
       this.winDetected();
     }
+    // when player wins
     if (this.gameOver && this.win) {
-      this.manager.endGame('win');
+      this.manager.currentLevel += 1;
+      if (this.manager.currentLevel <= Object.keys(this.manager.levels).length) {
+        this.manager.nextLevel();
+      } else {
+        this.manager.endGame('win');
+      }
     }
   },
 

@@ -15,6 +15,8 @@ class GameManager {
     this.playerMovesKeyFn;
     this.playerMovesMouseFn;
     this.instructions = this.instructions || this.createInstructions();
+    this.currentLevel = 1;
+    this.levels = this.setLevels();
   }
   //! Game play management timers
   beginFiring() {
@@ -29,9 +31,8 @@ class GameManager {
         return fireball.hitWall === false;
       })
       if (this.gameMap.gameOver && this.gameMap.win === false) {
-        clearInterval(this.gameMap.moveFireballs);
-        this.showGameOverDialogue('loss');
-        
+        // debugger
+        this.endGame('loss');
       }
     }, 20)
   }
@@ -59,13 +60,20 @@ class GameManager {
     this.gameCanvas.removeEventListener('mousemove', this.playerMovesMouseFn);
   }
 
-  //! Callbacks
+  // ! Level Management
+  setLevels() {
+    return {
+      1: LevelsUtil.levelOne.bind(this),
+      2: LevelsUtil.levelTwo.bind(this),
+      3: LevelsUtil.levelThree.bind(this),
+      4: LevelsUtil.levelFour.bind(this)
+    }
+  }
 
+  //! Callbacks
   startClicked(e) {
     if (e.target.innerText === 'Start') {
       this.startGame(e)
-      this.beginFiring();
-      this.keepFiring();
     } else {
       this.resetGame(e);
     } 
@@ -74,18 +82,31 @@ class GameManager {
   startGame(e) {
     this.dynamicCanvasCreation();
     this.gameCanvas = document.getElementById('shield_game');
-    e.target.innerText = 'Stop';
-    this.gameMap = new GameMap(this, this.gameCanvas, LevelsUtil.levelOne.apply(this));
+    e.target.innerText = 'Reset';
+    this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
     this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
     this.addInstructionsPop();
     this.hideNewGameDialogue();
+    this.beginFiring();
+    this.keepFiring();
+  }
+
+  nextLevel() {
+    this.dynamicRemoveCanvas();
+    this.dynamicCanvasCreation();
+    this.stopIntervals();
+    this.gameCanvas = document.getElementById('shield_game');
+    this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
+    this.setInGameListeners(this.gameMap)
+    this.gameCanvas.focus();
+    this.beginFiring();
+    this.keepFiring();
   }
 
   resetGame(e) {
     e.target.innerText = 'Start';
-    clearInterval(this.gameMap.moveFireballs);
-    clearInterval(this.gameMap.firing)
+    this.stopIntervals();
     this.removeInGameListeners(this.gameMap);
     this.dynamicRemoveCanvas();
     this.hideInstructionsPop();
@@ -95,11 +116,7 @@ class GameManager {
   }
 
   endGame(winLoss) {
-    clearInterval(this.gameMap.moveFireballs);
-    clearInterval(this.gameMap.firing)
     this.removeInGameListeners(this.gameMap);
-    // this.dynamicRemoveCanvas();
-    // this.hideInstructionsPop();
     this.showGameOverDialogue(winLoss);
   }
 
@@ -111,8 +128,12 @@ class GameManager {
     this.navigationArea.removeChild(this.navigationArea.lastChild);
   }
 
-  // ! View Presentation
+  stopIntervals() {
+    clearInterval(this.gameMap.moveFireballs);
+    clearInterval(this.gameMap.firing)
+  }
 
+  // ! View Presentation
   hideNewGameDialogue() {
     let newGame = document.getElementsByClassName('new-game')[0];
     this.pageCols.removeChild(newGame)

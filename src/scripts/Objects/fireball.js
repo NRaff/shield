@@ -54,7 +54,7 @@ class Fireball {
   manageTankCollision() {
     if (this.ctx.isPointInPath(this.gameMap.tank.path, this.pos.x, this.pos.y)){
       this.collisionOccured()
-      clearInterval(this.gameMap.firing)
+      this.gameMap.stopIntervals()
       this.gameMap.tank.color = 'purple';
       this.gameMap.gameOver = true;
       this.gameMap.win = false;
