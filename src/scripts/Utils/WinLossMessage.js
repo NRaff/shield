@@ -7,6 +7,11 @@ const WinLossMessage = {
   loss: {
     header: 'You lose!',
     message: "Better luck next time...Here's a hint: try bumping the tank against the map's boundaries..."
+  },
+
+  beatGame: {
+    header: 'Congrats!',
+    message: 'You beat the game (and possibly wasted several minutes of your life)...cheers!'
   }
 }
 

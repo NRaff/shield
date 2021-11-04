@@ -24,7 +24,7 @@ const PlayerEvents = {
       if (this.manager.currentLevel <= Object.keys(this.manager.levels).length) {
         this.manager.nextLevel();
       } else {
-        this.manager.endGame('win');
+        this.manager.endGame('beatGame');
       }
     }
   },

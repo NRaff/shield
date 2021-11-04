@@ -72,9 +72,10 @@ class Fireball {
     }
   }
 
-  // ricochetVector() {
-  //   if ()
-  // }
+  ricochetVector() {
+    // fireball has a vector
+    // gammapshield has a current start angle
+  }
 
   manageEnemyCollision() {
     for (let enemy of this.gameMap.enemies) {
