@@ -2,6 +2,7 @@ import Tank from "./Objects/tank";
 import Defaults from "./Utils/Defaults";
 import Portal from "./Objects/portal";
 import TankControlsUtil from "./Utils/TankControlsUtil";
+import Enemy from "./Objects/enemy";
 
 class GameMap {
   constructor(manager,canvas, level) {
@@ -11,8 +12,8 @@ class GameMap {
     this.width = this.canvas.width;
     this.level = level;
     this.ctx = this.canvas.getContext('2d');
-    this.walls = level.walls;
-    this.enemies = level.enemies;
+    this.walls = [];
+    this.enemies = [];
     this.portals = [];
     this.fireballs = [];
     this.barriers = [];
@@ -45,7 +46,7 @@ class GameMap {
     this.portals = Portal.drawPortals.call(this)
     this.redrawEnemies();
     this.redrawBarriers();
-    // this.enemies = Enemy.drawEnemies.call(this, this.level);
+    this.enemies = Enemy.drawEnemies.call(this, this.manager.currentLevel);
     // this.walls = Wall.drawWalls.call(this, this.level);
   }
 
