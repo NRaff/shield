@@ -50,20 +50,20 @@ class GameManager {
   }
 
   setInGameListeners(gameMap) {
-    this.setBuildListeners(gameMap)
-    // this.playerMovesKeyFn = PlayerEvents.moveKey.bind(gameMap);
-    // this.playerMovesMouseFn = PlayerEvents.moveMouse.bind(gameMap);
-    // this.gameCanvas.addEventListener('keydown', this.playerMovesKeyFn);
-    // this.gameCanvas.addEventListener('mousemove', this.playerMovesMouseFn);
+    // this.setBuildListeners(gameMap)
+    this.playerMovesKeyFn = PlayerEvents.moveKey.bind(gameMap);
+    this.playerMovesMouseFn = PlayerEvents.moveMouse.bind(gameMap);
+    this.gameCanvas.addEventListener('keydown', this.playerMovesKeyFn);
+    this.gameCanvas.addEventListener('mousemove', this.playerMovesMouseFn);
   }
 
   setBuildListeners(gameMap) {
     this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
-    // this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
-    // this.playerSetsFn = PlayerEvents.playerSets.bind(gameMap);
     this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
-    // this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
-    // this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
+  }
+
+  removeBuildListeners() {
+    this.gameCanvas.removeEventListener('mousedown', this.playerClicksFn);
   }
 
   removeInGameListeners() {
@@ -82,24 +82,33 @@ class GameManager {
   //! Callbacks
   startClicked(e) {
     if (e.target.innerText === 'Start') {
-      this.startGame(e)
+      this.createGame(e)
+    } else if (e.target.innerText === 'Go') {
+      this.resumePlay();
+      e.target.innerText = 'Reset';
     } else {
       this.resetGame(e);
-    } 
+    }
   }
 
-  startGame(e) {
+  createGame(e) {
     this.dynamicCanvasCreation();
     this.gameCanvas = document.getElementById('shield_game');
-    e.target.innerText = 'Reset';
+    e.target.innerText = 'Go';
     this.currentLevel = 1;
     this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
-    this.setInGameListeners(this.gameMap)
+    this.setBuildListeners(this.gameMap);
+    // this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
     this.addInstructionsPop();
     this.hideNewGameDialogue();
-    // this.beginFiring();
-    // this.keepFiring();
+    
+  }
+
+  resumePlay() {
+    this.setInGameListeners(this.gameMap);
+    this.beginFiring();
+    this.keepFiring();
   }
 
   nextLevel() {
