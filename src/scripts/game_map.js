@@ -47,7 +47,6 @@ class GameMap {
     this.redrawEnemies();
     this.redrawBarriers();
     this.enemies = Enemy.drawEnemies.call(this, this.manager.currentLevel);
-    // this.walls = Wall.drawWalls.call(this, this.level);
   }
 
   addFireballs() {

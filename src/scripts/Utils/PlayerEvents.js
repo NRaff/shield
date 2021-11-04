@@ -42,12 +42,7 @@ const PlayerEvents = {
     this.setMousePos(e);
     let barrier = new Barrier(this.mousePos,this.mousePos)
     this.currentBuildWall = barrier;
-    this.ctx.fill(barrier.path);
-    this.manager.playerDragsFn = PlayerEvents.playerDrags.bind(this);
-    this.manager.playerSetsFn = PlayerEvents.playerSets.bind(this);
-    this.canvas.addEventListener('mousemove', this.manager.playerDragsFn);
-    this.canvas.addEventListener('mouseup', this.manager.playerSetsFn);
-    console.log('player clicked');
+    window.requestAnimationFrame(this.redrawMap.bind(this));
   },
 
   playerDrags(e) {
@@ -67,11 +62,8 @@ const PlayerEvents = {
       let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
       this.barriers.push(newBarrier);
       this.currentBuildWall = null;
-      this.canvas.removeEventListener('mousemove', this.manager.playerDragsFn);
+      // this.canvas.removeEventListener('mousemove', this.manager.playerDragsFn);
       window.requestAnimationFrame(this.redrawMap.bind(this));
-      console.log(this.barriers.length)
-      console.log(this.manager.currentLevel)
-      console.log(Math.ceil(this.manager.currentLevel % 2))
       if (this.barriers.length === Math.ceil(this.manager.currentLevel / 2)) {
         this.manager.removeBuildListeners();
         let startBtn = document.getElementById('start');

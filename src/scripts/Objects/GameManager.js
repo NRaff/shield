@@ -60,8 +60,8 @@ class GameManager {
   setBuildListeners(gameMap) {
     this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
     this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
-    this.playerDragsFn = PlayerEvents.playerDrags.bind(this.gameCanvas);
-    this.playerSetsFn = PlayerEvents.playerSets.bind(this.gameCanvas);
+    this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
+    this.playerSetsFn = PlayerEvents.playerSets.bind(gameMap);
     this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
     this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
   }
@@ -105,7 +105,6 @@ class GameManager {
     this.currentLevel = 1;
     this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
     this.setBuildListeners(this.gameMap);
-    // this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
     this.addInstructionsPop();
     this.hideNewGameDialogue();
@@ -116,6 +115,7 @@ class GameManager {
     let startBtn = document.getElementById('start');
     startBtn.style.backgroundColor = 'whitesmoke';
     this.setInGameListeners(this.gameMap);
+    this.gameCanvas.focus();
     this.beginFiring();
     this.keepFiring();
   }
@@ -126,7 +126,6 @@ class GameManager {
     this.stopIntervals();
     this.gameCanvas = document.getElementById('shield_game');
     this.gameMap = new GameMap(this, this.gameCanvas);
-    // this.setInGameListeners(this.gameMap)
     this.setBuildListeners(this.gameMap);
     let startBtn = document.getElementById('start');
     startBtn.innerText = 'Go';
