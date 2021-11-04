@@ -34,6 +34,7 @@ class GameMap {
     this.tank.drawTank();
     this.redrawPortals();
     this.redrawBuildBarriers();
+    this.redrawCurrentBuildWall();
     this.redrawBarriers();
     this.redrawEnemies();
     this.redrawFireballs();
@@ -91,13 +92,10 @@ class GameMap {
   }
 
   redrawCurrentBuildWall() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.tank.drawTank();
-    this.redrawPortals();
-    this.redrawBarriers();
-    this.redrawEnemies();
-    this.ctx.fillStyle = this.currentBuildWall.color;
-    this.ctx.fill(this.currentBuildWall.path);
+    if (this.currentBuildWall) {
+      this.ctx.fillStyle = this.currentBuildWall.color;
+      this.ctx.fill(this.currentBuildWall.path);
+    }
   }
 
   redrawBuildBarriers() {

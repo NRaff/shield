@@ -59,11 +59,11 @@ class GameManager {
 
   setBuildListeners(gameMap) {
     this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
-    this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
-    this.playerSetsFn = PlayerEvents.playerSets.bind(gameMap);
+    // this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
+    // this.playerSetsFn = PlayerEvents.playerSets.bind(gameMap);
     this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
-    this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
-    this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
+    // this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
+    // this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
   }
 
   removeInGameListeners() {
