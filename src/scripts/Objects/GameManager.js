@@ -64,9 +64,7 @@ class GameManager {
   setLevels() {
     return {
       1: LevelsUtil.levelOne.bind(this),
-      2: LevelsUtil.levelTwo.bind(this),
-      3: LevelsUtil.levelThree.bind(this),
-      4: LevelsUtil.levelFour.bind(this)
+      2: LevelsUtil.levelTwo.bind(this)
     }
   }
 

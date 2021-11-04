@@ -1,7 +1,7 @@
 const WinLossMessage = {
   win: {
     header: 'You win!',
-    message: 'Congrats! You beat the level. Good luck on the next one. Continue below.'
+    message: 'Congrats! You beat the level. Good luck on the next one. Tap Start to begin.'
   },
 
   loss: {
