@@ -68,9 +68,13 @@ const PlayerEvents = {
       this.currentBuildWall = null;
       this.canvas.removeEventListener('mousemove', this.manager.playerDragsFn);
       window.requestAnimationFrame(this.redrawMap.bind(this));
-      if (this.barriers.length === Math.ceil(this.manager.currentLevel % 2)) {
+      console.log(this.barriers.length)
+      console.log(this.manager.currentLevel)
+      console.log(Math.ceil(this.manager.currentLevel % 2))
+      if (this.barriers.length === Math.ceil(this.manager.currentLevel / 2)) {
         this.manager.removeBuildListeners();
-        console.log('ready to start');
+        let startBtn = document.getElementById('start');
+        startBtn.style.backgroundColor = 'green';
       }
       //if the number of barriers is === the current level % 5, trigger the rest of the game
     }

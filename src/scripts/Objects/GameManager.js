@@ -106,6 +106,8 @@ class GameManager {
   }
 
   resumePlay() {
+    let startBtn = document.getElementById('start');
+    startBtn.style.backgroundColor = 'whitesmoke';
     this.setInGameListeners(this.gameMap);
     this.beginFiring();
     this.keepFiring();
@@ -117,10 +119,13 @@ class GameManager {
     this.stopIntervals();
     this.gameCanvas = document.getElementById('shield_game');
     this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
-    this.setInGameListeners(this.gameMap)
+    // this.setInGameListeners(this.gameMap)
+    this.setBuildListeners(this.gameMap);
+    let startBtn = document.getElementById('start');
+    startBtn.innerText = 'Go';
     this.gameCanvas.focus();
-    this.beginFiring();
-    this.keepFiring();
+    // this.beginFiring();
+    // this.keepFiring();
   }
 
   resetGame(e) {
