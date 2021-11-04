@@ -49,6 +49,7 @@ class Fireball {
     this.manageTankCollision();
     this.manageWallCollision();
     this.manageEnemyCollision();
+    this.manageBarrierCollision();
   }
 
   manageTankCollision() {
@@ -97,10 +98,18 @@ class Fireball {
     }
   }
 
+  manageBarrierCollision() {
+    for (let barrier of this.gameMap.barriers) {
+      if (this.ctx.isPointInPath(barrier.path, this.pos.x, this.pos.y)) {
+        this.collisionOccured();
+      }
+    }
+  }
+
   manageWallCollision() {
     for (let wall of this.gameMap.walls) {
       if (this.ctx.isPointInPath(wall.path, this.pos.x, this.pos.y)) {
-        this.collisionOccured()
+        this.collisionOccured();
       }
     }
   }
