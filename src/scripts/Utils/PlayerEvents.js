@@ -24,11 +24,6 @@ const PlayerEvents = {
     if (this.gameOver && this.win) {
       this.manager.currentLevel += 1;
       this.manager.nextLevel();
-      // if (this.manager.currentLevel <= Object.keys(this.manager.levels).length) {
-      //   this.manager.nextLevel();
-      // } else {
-      //   this.manager.endGame('beatGame');
-      // }
     }
   },
 
@@ -48,10 +43,9 @@ const PlayerEvents = {
   playerDrags(e) {
     if (this.currentBuildWall) {
       this.setMousePos(e);
+      console.log(this.currentBuildWall.start)
       let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
       this.currentBuildWall = newBarrier;
-
-
       window.requestAnimationFrame(this.redrawMap.bind(this));
     }
   },
@@ -62,13 +56,24 @@ const PlayerEvents = {
       let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
       this.barriers.push(newBarrier);
       this.currentBuildWall = null;
-      // this.canvas.removeEventListener('mousemove', this.manager.playerDragsFn);
       window.requestAnimationFrame(this.redrawMap.bind(this));
       if (this.barriers.length === Math.ceil(this.manager.currentLevel / 2)) {
         this.manager.removeBuildListeners();
         let startBtn = document.getElementById('start');
         startBtn.style.backgroundColor = 'green';
       }
+    }
+  },
+
+  undoBuild(keyEvent) {
+    if (keyEvent.key === 'z') {
+      this.barriers.pop();
+      let startBtn = document.getElementById('start');
+      if (startBtn.style.backgroundColor === 'green') {
+        startBtn.style.backgroundColor = 'whitesmoke';
+        this.manager.setBuildListeners(this);
+      }
+      window.requestAnimationFrame(this.redrawMap.bind(this));
     }
   }
 }

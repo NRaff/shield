@@ -15,6 +15,7 @@ class GameManager {
     this.playerMovesKeyFn;
     this.playerMovesMouseFn;
     this.playerSetsFn;
+    this.undoBuildFn;
     this.instructions = this.instructions || this.createInstructions();
     this.currentLevel = 1;
     this.levels = this.setLevels();
@@ -85,12 +86,19 @@ class GameManager {
     }
   }
 
+  addUndoListener() {
+    this.undoBuildFn = PlayerEvents.undoBuild.bind(this.gameMap);
+    document.addEventListener('keydown', this.undoBuildFn);
+  }
+
   //! Callbacks
   startClicked(e) {
     if (e.target.innerText === 'Start') {
       this.createGame(e)
+      this.addUndoListener();
     } else if (e.target.innerText === 'Go') {
       this.removeBuildListeners();
+      document.removeEventListener('keydown', this.undoBuildFn);
       this.resumePlay();
       e.target.innerText = 'Reset';
     } else {
@@ -127,11 +135,10 @@ class GameManager {
     this.gameCanvas = document.getElementById('shield_game');
     this.gameMap = new GameMap(this, this.gameCanvas);
     this.setBuildListeners(this.gameMap);
+    this.addUndoListener();
     let startBtn = document.getElementById('start');
     startBtn.innerText = 'Go';
     this.gameCanvas.focus();
-    // this.beginFiring();
-    // this.keepFiring();
   }
 
   resetGame(e) {
