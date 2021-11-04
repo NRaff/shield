@@ -49,10 +49,18 @@ class GameManager {
   }
 
   setInGameListeners(gameMap) {
-    this.playerMovesKeyFn = PlayerEvents.moveKey.bind(gameMap);
-    this.playerMovesMouseFn = PlayerEvents.moveMouse.bind(gameMap);
-    this.gameCanvas.addEventListener('keydown', this.playerMovesKeyFn);
-    this.gameCanvas.addEventListener('mousemove', this.playerMovesMouseFn);
+    this.setBuildListeners(gameMap)
+    // this.playerMovesKeyFn = PlayerEvents.moveKey.bind(gameMap);
+    // this.playerMovesMouseFn = PlayerEvents.moveMouse.bind(gameMap);
+    // this.gameCanvas.addEventListener('keydown', this.playerMovesKeyFn);
+    // this.gameCanvas.addEventListener('mousemove', this.playerMovesMouseFn);
+  }
+
+  setBuildListeners(gameMap) {
+    this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
+    this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
+    this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
+    this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
   }
 
   removeInGameListeners() {
@@ -87,8 +95,8 @@ class GameManager {
     this.gameCanvas.focus();
     this.addInstructionsPop();
     this.hideNewGameDialogue();
-    this.beginFiring();
-    this.keepFiring();
+    // this.beginFiring();
+    // this.keepFiring();
   }
 
   nextLevel() {

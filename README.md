@@ -49,8 +49,8 @@ Tech Stack
 - ✅ Add github and linkedin links
 - ✅ Add win/loss display
 - ✅ Create levels handling
-- 🟡 Polish design and collision animations
-- Play and test
+- ✅ Polish design and collision animations
+- ✅ Play and test
 #### Wednesday
 - ✅ add additional levels
 - Finalize design

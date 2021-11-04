@@ -24,7 +24,8 @@ class GameMap {
     this.mousePos = {
       x: 0,
       y: 0
-    }
+    },
+    this.currentBuildWall;
   }
 
   redrawMap() {
