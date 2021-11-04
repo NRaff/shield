@@ -60,10 +60,16 @@ class GameManager {
   setBuildListeners(gameMap) {
     this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
     this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
+    this.playerDragsFn = PlayerEvents.playerDrags.bind(this.gameCanvas);
+    this.playerSetsFn = PlayerEvents.playerSets.bind(this.gameCanvas);
+    this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
+    this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
   }
 
   removeBuildListeners() {
     this.gameCanvas.removeEventListener('mousedown', this.playerClicksFn);
+    this.gameCanvas.removeEventListener('mouseup', this.playerSetsFn);
+    this.gameCanvas.removeEventListener('mousemove', this.playerDragsFn);
   }
 
   removeInGameListeners() {
@@ -84,6 +90,7 @@ class GameManager {
     if (e.target.innerText === 'Start') {
       this.createGame(e)
     } else if (e.target.innerText === 'Go') {
+      this.removeBuildListeners();
       this.resumePlay();
       e.target.innerText = 'Reset';
     } else {
@@ -118,7 +125,7 @@ class GameManager {
     this.dynamicCanvasCreation();
     this.stopIntervals();
     this.gameCanvas = document.getElementById('shield_game');
-    this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
+    this.gameMap = new GameMap(this, this.gameCanvas);
     // this.setInGameListeners(this.gameMap)
     this.setBuildListeners(this.gameMap);
     let startBtn = document.getElementById('start');

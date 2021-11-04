@@ -10,7 +10,7 @@ class GameMap {
     this.canvas = canvas
     this.height = this.canvas.height;
     this.width = this.canvas.width;
-    this.level = level;
+    // this.level = level;
     this.ctx = this.canvas.getContext('2d');
     this.walls = [];
     this.enemies = [];

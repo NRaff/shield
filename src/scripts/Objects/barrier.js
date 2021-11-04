@@ -8,8 +8,8 @@ class Barrier  {
   }
 
   setSize() {
-    let width = Math.abs((this.start.x - this.end.x));
-    let height = Math.abs((this.start.y - this.end.y));
+    let width = this.end.x - this.start.x
+    let height = this.end.y - this.start.y
     return {
       w: width,
       h: height

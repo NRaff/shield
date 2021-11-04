@@ -23,11 +23,12 @@ const PlayerEvents = {
     // when player wins
     if (this.gameOver && this.win) {
       this.manager.currentLevel += 1;
-      if (this.manager.currentLevel <= Object.keys(this.manager.levels).length) {
-        this.manager.nextLevel();
-      } else {
-        this.manager.endGame('beatGame');
-      }
+      this.manager.nextLevel();
+      // if (this.manager.currentLevel <= Object.keys(this.manager.levels).length) {
+      //   this.manager.nextLevel();
+      // } else {
+      //   this.manager.endGame('beatGame');
+      // }
     }
   },
 
@@ -76,7 +77,6 @@ const PlayerEvents = {
         let startBtn = document.getElementById('start');
         startBtn.style.backgroundColor = 'green';
       }
-      //if the number of barriers is === the current level % 5, trigger the rest of the game
     }
   }
 }
