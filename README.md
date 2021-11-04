@@ -24,14 +24,14 @@ Tech Stack
 - ✅ Setup the project file structure
 - ✅ create html skeleton
 - ✅ add css reset
-- Complete basic board creation
+- ✅ Complete basic board creation
   - ✅ phys_object
   - ✅ wall
   - ✅ enemy
   - ✅ shield
   - ✅ tank
   - ✅ board
-- Begin design of objects in the game
+- ✅ Begin design of objects in the game
 #### Weekend
 - ✅ Complete objects design for tank, enemies, goals, map
 - ✅ Add player's tank
@@ -48,11 +48,11 @@ Tech Stack
 - ✅ Add win logic
 - ✅ Add github and linkedin links
 - ✅ Add win/loss display
-- Create levels handling
+- ✅ Create levels handling
 - 🟡 Polish design and collision animations
 - Play and test
 #### Wednesday
-- add additional levels
+- ✅ add additional levels
 - Finalize design
 - Prepare demo
 #### Thursday

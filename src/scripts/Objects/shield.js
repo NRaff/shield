@@ -40,6 +40,16 @@ class Shield {
 
     this.arcStart = angle + ArcType.eighth();
     this.arcEnd = -this.arcStart + ArcType.quarter();
+    // this.ricochetAngle();
+  }
+
+  ricochetAngle() {
+    let arcDegrees = this.arcStart * 57.2958
+    if (arcDegrees > 315 || arcDegrees <= 45) { console.log('Up') };
+    // if (arcDegrees > 45 || arcDegrees <= 135) { console.log('Right') };
+    if (arcDegrees > 135 || arcDegrees <= 225) { console.log('Down') };
+    // if (arcDegrees > 225 || arcDegrees <= 315) { console.log('Left') };
+
   }
 
   offset(){

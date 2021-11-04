@@ -68,9 +68,13 @@ class Fireball {
       this.color = 'blue';
       this.didRicochetShield = true;
       this.vector.x = this.vector.x * -1;
-      this.vector.y = this.vector.y * -1;
+      this.vector.y = this.vector.y * -1//this.vector.y * -1;
     }
   }
+
+  // ricochetVector() {
+  //   if ()
+  // }
 
   manageEnemyCollision() {
     for (let enemy of this.gameMap.enemies) {

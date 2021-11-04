@@ -83,6 +83,7 @@ class GameManager {
     this.dynamicCanvasCreation();
     this.gameCanvas = document.getElementById('shield_game');
     e.target.innerText = 'Reset';
+    this.currentLevel = 1;
     this.gameMap = new GameMap(this, this.gameCanvas, this.levels[this.currentLevel]());
     this.setInGameListeners(this.gameMap)
     this.gameCanvas.focus();
@@ -157,7 +158,7 @@ class GameManager {
 
   hideGameOverDialogue() {
     let dialogue = document.getElementsByClassName('game-over')[0];
-    this.pageCols.removeChild(dialogue);
+    if (dialogue) { this.pageCols.removeChild(dialogue) };
   }
 
   dynamicCreateGameOverDialogue(winOrLoss) {
