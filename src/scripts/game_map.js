@@ -15,6 +15,7 @@ class GameMap {
     this.enemies = level.enemies;
     this.portals = [];
     this.fireballs = [];
+    this.barriers = [];
     this.firing = ''; // the interval that triggers all enemies to fire
     this.moveFireballs = ''; // the interval that triggers the page refresh to keep moving bullets
     this.gameOver = false;
@@ -32,6 +33,7 @@ class GameMap {
     this.ctx.clearRect(0,0,this.width,this.height);
     this.tank.drawTank();
     this.redrawPortals();
+    this.redrawBuildBarriers();
     this.redrawBarriers();
     this.redrawEnemies();
     this.redrawFireballs();
@@ -86,6 +88,23 @@ class GameMap {
       x: 5,
       y: this.height / 2 + Defaults.centerYOffset()
     }
+  }
+
+  redrawCurrentBuildWall() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.tank.drawTank();
+    this.redrawPortals();
+    this.redrawBarriers();
+    this.redrawEnemies();
+    this.ctx.fillStyle = this.currentBuildWall.color;
+    this.ctx.fill(this.currentBuildWall.path);
+  }
+
+  redrawBuildBarriers() {
+    this.barriers.forEach((barrier) => {
+      this.ctx.fillStyle = barrier.color;
+      this.ctx.fill(barrier.path);
+    })
   }
 
   redrawBarriers() {

@@ -41,7 +41,7 @@ const PlayerEvents = {
     this.setMousePos(e);
     let barrier = new Barrier(this.mousePos,this.mousePos)
     this.currentBuildWall = barrier;
-    this.ctx.fill(barrier)
+    this.ctx.fill(barrier.path)
     console.log('player clicked');
   },
 
@@ -50,7 +50,21 @@ const PlayerEvents = {
       this.setMousePos(e);
       let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
       this.currentBuildWall = newBarrier;
-      this.ctx.fill(this.currentBuildWall.path);
+
+
+      window.requestAnimationFrame(this.redrawCurrentBuildWall.bind(this));
+    }
+  },
+
+  playerSets(e) {
+    if (this.currentBuildWall) {
+      this.setMousePos(e);
+      let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
+      this.barriers.push(newBarrier);
+      this.currentBuildWall = null;
+      this.canvas.removeEventListener('mousemove', this.manager.playerDragsFn);
+      window.requestAnimationFrame(this.redrawMap.bind(this));
+      console.log(this.barriers);
     }
   }
 }

@@ -14,6 +14,7 @@ class GameManager {
     this.gameMap;
     this.playerMovesKeyFn;
     this.playerMovesMouseFn;
+    this.playerSetsFn;
     this.instructions = this.instructions || this.createInstructions();
     this.currentLevel = 1;
     this.levels = this.setLevels();
@@ -59,8 +60,10 @@ class GameManager {
   setBuildListeners(gameMap) {
     this.playerClicksFn = PlayerEvents.playerClicks.bind(gameMap);
     this.playerDragsFn = PlayerEvents.playerDrags.bind(gameMap);
+    this.playerSetsFn = PlayerEvents.playerSets.bind(gameMap);
     this.gameCanvas.addEventListener('mousedown', this.playerClicksFn);
     this.gameCanvas.addEventListener('mousemove', this.playerDragsFn);
+    this.gameCanvas.addEventListener('mouseup', this.playerSetsFn);
   }
 
   removeInGameListeners() {

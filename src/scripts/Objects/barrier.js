@@ -4,6 +4,7 @@ class Barrier  {
     this.end = end,
     this.size = this.setSize();
     this.path = this.setPath();
+    this.color = 'darkgray';
   }
 
   setSize() {
