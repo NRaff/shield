@@ -1,5 +1,5 @@
 # Shield
-A game where a player runs a gauntlet.
+A game where a player runs a gauntlet. Play the game, [here](https://nraff.github.io/shield/#)
 
 ## Brief
 The game, Shield, pits users against increasingly challenging levels. The user is in control of a tank like object that can move and shield from attacks. Enemies surface in the form of stationary towers that shoot at the tank. The players goal is to steer the tank from one side of the map to the other with out being destroyed.
