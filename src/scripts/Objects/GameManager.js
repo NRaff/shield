@@ -235,12 +235,15 @@ class GameManager {
     header.innerText = "Tap 'Start' to begin!"
     subDiv.appendChild(header);
     let subUl = document.createElement('ul');
+    let controlsBuild = document.createElement('li');
+    controlsBuild.innerText = 'Click and drag to create a wall. You will not be able to create anymore walls after you create up to half the level count.';
     let controlsMove = document.createElement('li');
     controlsMove.innerText = 'Use WASD or Arrow Keys to move';
     let controlsShield = document.createElement('li');
     controlsShield.innerText = 'Move your mouse over the game map to redirect your shield';
     let winInstruction = document.createElement('li');
     winInstruction.innerText = 'Win by successfully moving the tank from one portal to another without getting hit'
+    subUl.appendChild(controlsBuild);
     subUl.appendChild(controlsMove);
     subUl.appendChild(controlsShield);
     subUl.appendChild(winInstruction);

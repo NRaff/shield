@@ -43,7 +43,6 @@ const PlayerEvents = {
   playerDrags(e) {
     if (this.currentBuildWall) {
       this.setMousePos(e);
-      console.log(this.currentBuildWall.start)
       let newBarrier = new Barrier(this.currentBuildWall.start, this.mousePos);
       this.currentBuildWall = newBarrier;
       window.requestAnimationFrame(this.redrawMap.bind(this));
